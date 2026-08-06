@@ -1,0 +1,125 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { describe, expect, it } from "vitest";
+
+import { parseCSV, parseCSVToObjects } from "../csv";
+import { buildSchedule, zonedWallTimeToUTC } from "../schedule";
+
+const fixture = readFileSync(join(__dirname, "fixtures/schedule.csv"), "utf8");
+
+describe("parser de CSV", () => {
+  it("respeita aspas em campo com vírgula (o bug do app iOS)", () => {
+    const line = `2025-09-18,11:00,Podcast Montanhista,"Episódio inaugural, ao vivo da Expo.",EXPO,3600,entretenimento,podcast_cover`;
+    const [row] = parseCSV(line);
+
+    expect(row).toHaveLength(8);
+    expect(row[3]).toBe("Episódio inaugural, ao vivo da Expo.");
+    expect(row[4]).toBe("EXPO");
+    expect(row[6]).toBe("entretenimento");
+  });
+
+  it("entende aspas escapadas", () => {
+    const [row] = parseCSV(`a,"disse ""oi"" ontem",c`);
+    expect(row[1]).toBe('disse "oi" ontem');
+  });
+
+  it("aguenta quebra de linha dentro de um campo", () => {
+    const rows = parseCSV(`a,"linha 1\nlinha 2",c\nd,e,f`);
+    expect(rows).toHaveLength(2);
+    expect(rows[0][1]).toBe("linha 1\nlinha 2");
+    expect(rows[1]).toEqual(["d", "e", "f"]);
+  });
+
+  it("lida com CRLF e BOM do Google Sheets", () => {
+    const rows = parseCSV("﻿a,b\r\nc,d\r\n");
+    expect(rows).toEqual([
+      ["a", "b"],
+      ["c", "d"],
+    ]);
+  });
+
+  it("normaliza cabeçalhos com acento e maiúscula", () => {
+    const [row] = parseCSVToObjects("Data,Hora,Título\n2025-09-18,10:00,Expo");
+    expect(row["titulo"]).toBe("Expo");
+  });
+});
+
+describe("fuso horário", () => {
+  it("interpreta a hora da planilha como horário de Paraty, não do servidor", () => {
+    // 10:00 em Paraty (UTC-3) é 13:00 UTC — o erro clássico seria devolver 10:00Z.
+    expect(zonedWallTimeToUTC("2025-09-18", "10:00").toISOString()).toBe(
+      "2025-09-18T13:00:00.000Z",
+    );
+  });
+});
+
+describe("programação a partir da planilha real", () => {
+  const schedule = buildSchedule(fixture);
+
+  it("carrega todos os 31 eventos, sem descartar nenhuma linha", () => {
+    expect(schedule.events).toHaveLength(31);
+    expect(schedule.skipped).toBe(0);
+  });
+
+  it("deriva os dias dos dados, sem datas fixas no código", () => {
+    expect(schedule.days.map((day) => day.key)).toEqual([
+      "2025-09-18",
+      "2025-09-19",
+      "2025-09-20",
+      "2025-09-21",
+    ]);
+    expect(schedule.days.map((day) => day.count)).toEqual([9, 10, 7, 5]);
+  });
+
+  it("classifica corretamente as linhas que tinham vírgula na descrição", () => {
+    // No app iOS estas 4 linhas deslocavam as colunas: a largada da UTSB110
+    // aparecia como "entretenimento" e com o local errado.
+    const largada = schedule.events.find((event) => event.title === "Largada / Start UTSB110");
+
+    expect(largada?.type).toBe("esporte");
+    expect(largada?.location).toBe("ARENA");
+    expect(largada?.description).toContain(",");
+  });
+
+  it("aceita hora de um dígito", () => {
+    const treino = schedule.events.find((event) => event.title === "Treinão Mombora");
+
+    expect(treino).toBeDefined();
+    expect(treino?.startsAt).toBe("2025-09-19T10:30:00.000Z"); // 07:30 em Paraty
+  });
+
+  it("usa 1 h quando a planilha não informa duração", () => {
+    const abertura = schedule.events.find((event) => event.title.includes("Abertura Oficial"));
+    expect(abertura?.durationSeconds).toBe(3600);
+  });
+
+  it("ordena por horário de início", () => {
+    const times = schedule.events.map((event) => event.startsAt);
+    expect([...times].sort()).toEqual(times);
+  });
+
+  it("gera slugs únicos e legíveis para compartilhar", () => {
+    const slugs = schedule.events.map((event) => event.slug);
+
+    expect(new Set(slugs).size).toBe(slugs.length);
+    expect(slugs).toContain("utmb-expo-09181000");
+  });
+});
+
+describe("tolerância a planilha malformada", () => {
+  it("descarta a linha ruim sem derrubar as boas", () => {
+    const csv = [
+      "data,hora,titulo,descricao,local,duracao,tipo,imagem",
+      "2025-09-18,10:00,Bom,ok,EXPO,3600,esporte,img",
+      "linha,sem,sentido",
+      ",,,,,,,", // linha em branco: descartada já no CSV, nem chega a contar como erro
+      "2025-09-18,25:99,Hora inválida,ok,EXPO,3600,esporte,img",
+      "2025-09-18,12:00,Outro bom,ok,EXPO,3600,ativacao,img",
+    ].join("\n");
+
+    const schedule = buildSchedule(csv);
+
+    expect(schedule.events.map((event) => event.title)).toEqual(["Bom", "Outro bom"]);
+    expect(schedule.skipped).toBe(2);
+  });
+});

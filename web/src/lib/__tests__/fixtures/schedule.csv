@@ -1,0 +1,32 @@
+data,hora,titulo,descricao,local,duracao,tipo,imagem
+2025-09-18,10:00,UTMB EXPO,Exposição aberta ao público e atletas para explorar novidades e produtos das marcas parceiras.,EXPO,39600,entretenimento,expo_main
+2025-09-18,10:00,Retirada de Kits / Bib Retrieval,Momento para os atletas das provas retirarem seus kits de participação.,EXPO,39600,esporte,kit_retrieval
+2025-09-18,10:30,Ativação Yopp - Yoga & Alongamento,Sessão revigorante de yoga e alongamento pré-prova com a Yopp para relaxar corpo e mente.,EXPO,1800,ativacao,activation_yopp
+2025-09-18,11:00,Podcast Montanhista,"Episódio inaugural do podcast oficial do evento, ao vivo da Expo.",EXPO,3600,entretenimento,podcast_cover
+2025-09-18,13:00,Podcast Pau Capell,Bate-papo com o atleta Pau Capell e convidados sobre o universo trail.,EXPO,3600,entretenimento,podcast_cover
+2025-09-18,15:00,Sessão de Autógrafos,Oportunidade para fãs encontrarem e pegarem autógrafos de atletas de elite e personalidades.,EXPO,3600,entretenimento,autographs_main
+2025-09-18,16:00,Abertura Oficial / Official Opening,Cerimônia oficial de boas-vindas aos atletas e início do evento.,EXPO,,esporte,opening_official
+2025-09-18,17:30,Briefing Técnico / Technical UTSB110,Instruções técnicas e de segurança obrigatórias para atletas da UTSB110.,EXPO,1800,esporte,briefing_cover
+2025-09-18,18:00,Podcast Fernanda Maciel,Fernanda Maciel comanda o podcast com temas globais do esporte e convidados especiais.,EXPO,3600,entretenimento,podcast_cover
+2025-09-19,7:30,Treinão Mombora,Treino coletivo leve e aquecimento com a Mombora para começar o dia.,EXPO,1800,ativacao,training_mombora
+2025-09-19,10:00,UTMB EXPO,"Segundo dia da Expo, com mais novidades, produtos e interações.",EXPO,39600,entretenimento,expo_main
+2025-09-19,10:00,Retirada de Kits / Bib Retrieval,Último dia para retirada de kits das provas (verificar horários limite por prova).,EXPO,39600,esporte,kit_retrieval
+2025-09-19,10:30,Ativação Hoka - Experimentação e Dicas,Teste os últimos lançamentos da Hoka e receba dicas de corrida dos especialistas da marca.,EXPO,1800,ativacao,activation_hoka
+2025-09-19,12:00,Apresentação Atletas Elite,Conheça os principais atletas de elite que competirão no evento.,EXPO,,esporte,elite_athletes
+2025-09-19,13:00,Briefing Técnico / Technical PTR55,Instruções técnicas e de segurança obrigatórias para atletas da PTR55.,EXPO,1800,esporte,briefing_cover
+2025-09-19,13:30,Briefing Técnico / Technical PTR35,Instruções técnicas e de segurança obrigatórias para atletas da PTR35.,EXPO,1800,esporte,briefing_cover
+2025-09-19,14:00,Briefing Técnico / Technical PTR20,Instruções técnicas e de segurança obrigatórias para atletas da PTR20.,EXPO,1800,esporte,briefing_cover
+2025-09-19,15:00,Exibição Filme: Projeto Caiçara,Documentário especial sobre o Projeto Caiçara e sua conexão com a cultura local e o trail.,EXPO,,entretenimento,film_caicara
+2025-09-19,19:00,Largada / Start UTSB110,"Início da ultramaratona UTSB110, a prova rainha do evento, na Arena UTMB.",ARENA,,esporte,start_utsb110
+2025-09-20,6:00,Largada / Start PTR55,Início da desafiadora prova PTR55 na Arena UTMB.,ARENA,,esporte,start_ptr55
+2025-09-20,7:30,Largada / Start PTR35,Início da prova de média distância PTR35 na Arena UTMB.,ARENA,,esporte,start_ptr35
+2025-09-20,8:30,Largada / Start PTR20,Início da rápida e dinâmica prova PTR20 na Arena UTMB.,ARENA,,esporte,start_ptr20
+2025-09-20,10:00,UTMB EXPO,Expo aberta na Arena UTMB durante o dia das provas.,EXPO,36000,entretenimento,expo_main
+2025-09-20,10:00,Retirada de Kits / Bib Retrieval (7km),Último dia para retirada de kits das provas (verificar horários limite por prova).,EXPO,39600,esporte,kit_retrieval
+2025-09-20,10:00,Banda Marcial,Apresentação especial da Banda Marcial de Paraty animando a Arena.,ARENA,3600,entretenimento,show_bandamarcial
+2025-09-20,18:00,Exibição Filme: Histórias do Trail,Inspire-se com uma seleção de curtas e documentários sobre histórias marcantes do trail running mundial.,EXPO,,entretenimento,film_trail_stories
+2025-09-21,7:00,Largada / Start 7KM,"Participe da prova festiva de 7km, aberta a todos os níveis, largando da Arena UTMB.",ARENA,,esporte,start_7km
+2025-09-21,9:00,Corrida Kids,Corrida infantil para os pequenos atletas se divertirem e experimentarem o trail na Arena UTMB.,ARENA,,esporte,kids_race
+2025-09-21,10:00,UTMB EXPO,Últimas horas para visitar a Expo na Arena UTMB.,EXPO,14400,entretenimento,expo_main
+2025-09-21,10:30,Premiação / Award Ceremony,Cerimônia de reconhecimento e premiação dos vencedores de todas as categorias na Arena UTMB.,EXPO,5400,esporte,awards_ceremony
+2025-09-21,12:00,Encerramento / Closure,Cerimônia oficial de encerramento do Paraty Brazil by UTMB 2025 na Arena UTMB.,EXPO,7200,esporte,closing_ceremony

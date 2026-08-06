@@ -1,0 +1,39 @@
+name: Web — testes e build
+
+on:
+  push:
+    branches: ["main", "claude/**"]
+    paths: ["web/**", ".github/workflows/web-ci.yml"]
+  pull_request:
+    paths: ["web/**", ".github/workflows/web-ci.yml"]
+
+defaults:
+  run:
+    working-directory: web
+
+jobs:
+  check:
+    name: Lint, testes e build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Testes
+        run: npm test
+
+      # Sem SCHEDULE_CSV_URL o build usa uma programação vazia, então valida a
+      # compilação sem depender da planilha estar no ar.
+      - name: Build
+        run: npm run build

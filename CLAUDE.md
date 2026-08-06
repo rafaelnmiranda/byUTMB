@@ -1,9 +1,26 @@
 # CLAUDE.md — contexto do projeto byUTMB
 
-App iOS (SwiftUI) do evento **Paraty Brazil by UTMB** — trail running em Paraty/RJ.
-Plano completo de retomada: **[`docs/PLANO_RETOMADA.md`](docs/PLANO_RETOMADA.md)**.
+Evento **Paraty Brazil by UTMB** — trail running em Paraty/RJ.
 
-## Estrutura
+O repositório tem **dois projetos**:
+
+| Pasta | O quê | Status |
+|---|---|---|
+| **`web/`** | PWA em Next.js | **Frente ativa.** Toda funcionalidade nova vai aqui |
+| `byUTMB/` | App iOS em SwiftUI | Congelado — referência histórica |
+
+A distribuição pela App Store foi abandonada (iOS é ~15–20% do público no Brasil, e o
+review bloqueava correções durante o evento). Contexto e comparação:
+[`docs/PLANO_RETOMADA.md`](docs/PLANO_RETOMADA.md) → [`docs/PLANO_PWA.md`](docs/PLANO_PWA.md).
+
+**Ao mexer no `web/`**, leia [`web/README.md`](web/README.md). O resto deste arquivo
+descreve o app iOS congelado.
+
+---
+
+## App iOS (congelado)
+
+### Estrutura
 
 - `byUTMB/Models/` — `Event`, `EventType`, `Weather*`, `Quote`, `AstronomyPicture`
 - `byUTMB/Services/` — um `ObservableObject` por fonte de dados (Schedule, Weather, Quote, Astronomy)
@@ -14,14 +31,14 @@ O projeto usa **grupos sincronizados com o sistema de arquivos** (`objectVersion
 arquivos `.swift` novos dentro de `byUTMB/` entram no target automaticamente, **não é
 preciso editar o `.pbxproj`** para adicionar arquivos.
 
-## Fonte de dados
+### Fonte de dados
 
 A programação vem de uma planilha pública do Google Sheets exportada em CSV
 (`OnlineScheduleService.swift`). Colunas: `data, hora, titulo, descricao, local,
 duracao, tipo, imagem`. `tipo` ∈ {esporte, entretenimento, ativacao}. `imagem` é o nome
 de um asset local.
 
-## Convenções
+### Convenções
 
 - Idioma da UI e dos comentários: **português (pt-BR)**
 - Cores da marca vêm do asset catalog: `UTMBBlue`, `UTMBYellow`, `UTMBGreen`
@@ -29,7 +46,7 @@ de um asset local.
 - Views de erro seguem o padrão ícone + título + `error.localizedDescription` + botão
   "Tentar novamente"
 
-## Armadilhas conhecidas (ler antes de mexer)
+### Armadilhas conhecidas (ler antes de mexer)
 
 1. **Parser de CSV quebra em campos com aspas/vírgula** — plano §2.2
 2. **Nomes de cores com case errado** — plano §2.3
@@ -38,7 +55,7 @@ de um asset local.
 5. **Filtro de dia amarrado a 18–21 de setembro de 2025** — plano §2.6
 6. **Chaves de API em texto claro em repo público** — plano §2.1 (revogar!)
 
-## Build
+### Build
 
 Não há Xcode neste ambiente remoto (Linux). Compilação, testes e archive são feitos no
 Mac. O workflow do GitHub Actions roda em `macos-latest` — mas **não há scheme
