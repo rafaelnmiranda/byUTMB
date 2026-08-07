@@ -23,6 +23,36 @@ npm run dev
 > O service worker só é registrado em produção (`npm run build && npm run start`),
 > para não atrapalhar o hot reload.
 
+## Testar no celular
+
+O dev server já escuta na rede local e imprime o endereço ao subir:
+
+```
+- Network:  http://192.168.0.42:3000
+```
+
+Abra esse endereço no celular, com os dois aparelhos no mesmo Wi-Fi.
+
+**Se a página abrir mas nada responder ao toque** — filtros e seletor de dias
+inertes — é o Next bloqueando os chunks de JavaScript para hosts que não sejam
+`localhost`. As faixas de rede local comuns já estão liberadas em
+[`next.config.ts`](next.config.ts); se a sua for diferente, informe o IP:
+
+```bash
+DEV_ORIGIN=192.0.2.42 npm run dev
+```
+
+Para um teste mais fiel ao que o atleta vai ver, use a build de produção — sem
+HMR, sem bloqueio de origem e com o desempenho real:
+
+```bash
+npm run build && npm run start
+```
+
+Em qualquer um dos dois, por HTTP puro o Safari **não registra o service
+worker**, então offline e "Adicionar à Tela de Início" não funcionam. Para isso é
+preciso HTTPS: `npm run dev -- --experimental-https` ou um deploy de preview.
+
 ## Variáveis de ambiente
 
 Veja [`.env.example`](.env.example). Nenhuma chave entra no Git.
