@@ -4,7 +4,7 @@ A programação do app vem de uma planilha do Google Sheets. **Não é preciso m
 código nem publicar nada**: alterou a planilha, o app pega sozinho em até 5 minutos.
 
 **Planilha:**
-<https://docs.google.com/spreadsheets/d/1tsRN2gHLSVr59h3YCTWAXQuVXN8Kc2wqRENCtPTeR_0/edit>
+<https://docs.google.com/spreadsheets/d/1Tn6sLvxj5kEQD9l8hZb9BP8dxz1sQzKp/edit>
 
 ## Colunas
 

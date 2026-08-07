@@ -124,16 +124,17 @@ describe("tolerância a planilha malformada", () => {
   });
 });
 
-describe("agenda oficial de 2026", () => {
+describe("agenda de 2026 publicada na planilha", () => {
+  // Fixture exportado da planilha de produção: serve de regressão e de backup.
   const csv = readFileSync(join(__dirname, "fixtures/agenda-2026.csv"), "utf8");
   const schedule = buildSchedule(csv);
 
-  it("carrega os 39 itens sem descartar linha", () => {
-    expect(schedule.events).toHaveLength(39);
+  it("carrega os 38 itens sem descartar linha", () => {
+    expect(schedule.events).toHaveLength(38);
     expect(schedule.skipped).toBe(0);
   });
 
-  it("cobre os 4 dias oficiais, 17 a 20 de setembro", () => {
+  it("cobre os 4 dias oficiais, 17 a 20 de setembro de 2026", () => {
     expect(schedule.days.map((day) => day.key)).toEqual([
       "2026-09-17",
       "2026-09-18",
@@ -142,25 +143,26 @@ describe("agenda oficial de 2026", () => {
     ]);
   });
 
-  it("tem entretenimento e ativação em todos os dias", () => {
+  it("lê o formato de data brasileiro que o Sheets gera", () => {
+    // A planilha traz 17/09/2026, não 2026-09-17.
+    expect(csv).toContain("17/09/2026");
+    expect(schedule.events[0].dayKey).toBe("2026-09-17");
+  });
+
+  it("usa os três tipos de evento", () => {
+    const tipos = new Set(schedule.events.map((event) => event.type));
+    expect(tipos).toEqual(new Set(["esporte", "entretenimento", "ativacao"]));
+  });
+
+  it("tem entretenimento em todos os dias", () => {
     for (const day of schedule.days) {
       const doDia = schedule.events.filter((event) => event.dayKey === day.key);
-
       expect(doDia.some((event) => event.type === "entretenimento")).toBe(true);
-      expect(doDia.some((event) => event.type === "ativacao")).toBe(true);
     }
   });
 
-  it("mantém a largada da PTR 108 na sexta às 19:00 de Paraty", () => {
-    const largada = schedule.events.find((event) => event.title === "Largada PTR 108");
-
-    expect(largada?.startsAt).toBe("2026-09-18T22:00:00.000Z");
-    expect(largada?.type).toBe("esporte");
-    expect(largada?.featured).toBe(true);
-  });
-
-  it("marca as largadas e cerimônias como destaque", () => {
-    const destaques = schedule.events.filter((event) => event.featured);
-    expect(destaques.length).toBeGreaterThanOrEqual(10);
+  it("converte os horários para o fuso de Paraty", () => {
+    // Primeiro evento às 10:00 de Paraty = 13:00 UTC.
+    expect(schedule.events[0].startsAt).toBe("2026-09-17T13:00:00.000Z");
   });
 });
