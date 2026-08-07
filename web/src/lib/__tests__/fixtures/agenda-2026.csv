@@ -1,0 +1,40 @@
+data,hora,titulo,descricao,local,duracao,tipo,imagem,link,destaque
+2026-09-17,10:00,UTMB EXPO,Exposição aberta ao público e atletas para explorar novidades e produtos das marcas parceiras.,EXPO,39600,entretenimento,,,sim
+2026-09-17,10:00,Retirada de Kits / Bib Pick-up,Retirada dos kits de participação. Leve documento com foto.,EXPO,39600,esporte,,,sim
+2026-09-17,10:30,Ativação Yoga & Alongamento,[EXEMPLO] Sessão de yoga e alongamento pré-prova com marca parceira.,EXPO,1800,ativacao,,,
+2026-09-17,11:00,Podcast ao vivo da Expo,"[EXEMPLO] Bate-papo ao vivo com atletas e convidados, direto da Expo.",EXPO,3600,entretenimento,,,
+2026-09-17,16:00,Abertura Oficial / Official Opening,Cerimônia oficial de boas-vindas aos atletas e início do evento.,EXPO,3600,esporte,,,sim
+2026-09-17,17:30,Briefing Técnico PTR 108,Instruções técnicas e de segurança obrigatórias para atletas da PTR 108.,EXPO,1800,esporte,,,sim
+2026-09-17,18:30,Show de Abertura,[EXEMPLO] Música ao vivo com banda local para abrir o fim de semana.,ARENA,5400,entretenimento,,,
+2026-09-18,07:30,Treinão de Aquecimento,[EXEMPLO] Corrida leve coletiva para soltar as pernas antes das provas.,ARENA,3600,ativacao,,,
+2026-09-18,10:00,UTMB EXPO,"Segundo dia da Expo, com novidades, produtos e interações.",EXPO,39600,entretenimento,,,
+2026-09-18,10:00,Retirada de Kits / Bib Pick-up,Retirada dos kits de participação. Leve documento com foto.,EXPO,39600,esporte,,,
+2026-09-18,12:00,Apresentação Atletas de Elite,Apresentação dos atletas de elite inscritos na edição.,EXPO,3600,esporte,,,sim
+2026-09-18,13:00,Briefing Técnico PTR 58,Instruções técnicas e de segurança obrigatórias para atletas da PTR 58.,EXPO,1800,esporte,,,
+2026-09-18,13:30,Briefing Técnico PTR 34,Instruções técnicas e de segurança obrigatórias para atletas da PTR 34.,EXPO,1800,esporte,,,
+2026-09-18,14:00,Briefing Técnico PTR 25,Instruções técnicas e de segurança obrigatórias para atletas da PTR 25.,EXPO,1800,esporte,,,
+2026-09-18,14:30,Briefing Técnico PTR 17,Instruções técnicas e de segurança obrigatórias para atletas da PTR 17.,EXPO,1800,esporte,,,
+2026-09-18,15:00,Sessão de Autógrafos,[EXEMPLO] Encontro com atletas de elite para fotos e autógrafos.,EXPO,3600,entretenimento,,,
+2026-09-18,19:00,Largada PTR 108,"Largada da prova rainha do evento, a PTR 108.",ARENA,1800,esporte,,,sim
+2026-09-18,20:30,DJ na Arena,[EXEMPLO] Música na Arena para acompanhar a saída dos atletas da PTR 108.,ARENA,7200,entretenimento,,,
+2026-09-19,05:00,Largada PTR 58,Largada da PTR 58.,ARENA,1800,esporte,,,sim
+2026-09-19,06:00,Largada PTR 34,Largada da PTR 34.,ARENA,1800,esporte,,,sim
+2026-09-19,08:00,Largada PTR 25,Largada da PTR 25.,ARENA,1800,esporte,,,sim
+2026-09-19,09:00,Ativação Test-Drive de Calçados,[EXEMPLO] Teste modelos de calçado de trail das marcas parceiras num circuito curto.,EXPO,10800,ativacao,,,
+2026-09-19,10:00,UTMB EXPO,Terceiro dia da Expo.,EXPO,39600,entretenimento,,,
+2026-09-19,10:00,Retirada de Kits,Retirada dos kits das provas de domingo.,EXPO,39600,esporte,,,
+2026-09-19,12:00,Música ao Vivo na Arena,[EXEMPLO] Programação musical enquanto os atletas chegam.,ARENA,10800,entretenimento,,,
+2026-09-19,14:00,Largada PTR 17,"Largada da PTR 17, na Fazenda Bananal.",FAZENDA BANANAL,1800,esporte,,,sim
+2026-09-19,15:00,Limite PTR 25,Tempo limite para conclusão da PTR 25.,ARENA,1800,esporte,,,
+2026-09-19,16:00,Cinema de Montanha,[EXEMPLO] Sessão de curtas sobre trail running e montanhismo.,EXPO,5400,entretenimento,,,
+2026-09-19,16:00,Limite PTR 34,Tempo limite para conclusão da PTR 34.,ARENA,1800,esporte,,,
+2026-09-19,18:30,Limite PTR 17,Tempo limite para conclusão da PTR 17.,ARENA,1800,esporte,,,
+2026-09-19,21:00,Limite PTR 58,Tempo limite para conclusão da PTR 58.,ARENA,1800,esporte,,,
+2026-09-20,01:00,Limite PTR 108,Tempo limite para conclusão da PTR 108.,ARENA,1800,esporte,,,
+2026-09-20,07:00,Largada RUN 7,Largada da RUN 7.,ARENA,1800,esporte,,,sim
+2026-09-20,08:00,Ativação Recuperação,"[EXEMPLO] Massagem, crioterapia e alongamento assistido para quem cruzou a linha.",ARENA,10800,ativacao,,,
+2026-09-20,09:00,Corrida Kids,"Prova para as crianças, com percurso curto e medalha para todos.",ARENA,3600,esporte,,,sim
+2026-09-20,09:30,Roda de Samba,[EXEMPLO] Música ao vivo na Arena durante as chegadas.,ARENA,7200,entretenimento,,,
+2026-09-20,10:30,Premiação / Award Ceremony,Cerimônia de premiação das provas do fim de semana.,EXPO,5400,esporte,,,sim
+2026-09-20,11:30,Sorteio de Brindes,[EXEMPLO] Sorteio de produtos das marcas parceiras entre os atletas presentes.,EXPO,1800,entretenimento,,,
+2026-09-20,12:00,Encerramento do Evento,Encerramento oficial da edição 2026.,EXPO,3600,esporte,,,sim

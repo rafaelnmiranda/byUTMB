@@ -17,7 +17,7 @@ export default function OfflinePage() {
 
       <Link
         href="/programacao"
-        className="rounded-full bg-utmb-blue px-5 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-blue"
+        className="rounded-full bg-utmb-navy px-5 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-navy"
       >
         Ver programação salva
       </Link>

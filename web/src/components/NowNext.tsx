@@ -41,8 +41,8 @@ export function NowNext({ events }: { events: EventItem[] }) {
         <section className="flex flex-col gap-2">
           <SectionTitle>
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-utmb-green opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-utmb-green" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-utmb-teal opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-utmb-teal" />
             </span>
             Acontecendo agora
           </SectionTitle>
@@ -71,7 +71,7 @@ export function NowNext({ events }: { events: EventItem[] }) {
 
           <Link
             href="/programacao"
-            className="mt-1 self-start text-sm font-semibold text-utmb-blue underline underline-offset-4 dark:text-utmb-yellow"
+            className="mt-1 self-start text-sm font-semibold text-utmb-navy underline underline-offset-4 dark:text-utmb-yellow"
           >
             Ver programação completa
           </Link>
@@ -103,7 +103,7 @@ function EventOver({ events }: { events: EventItem[] }) {
       </p>
       <Link
         href="/programacao"
-        className="self-center text-sm font-semibold text-utmb-blue underline underline-offset-4 dark:text-utmb-yellow"
+        className="self-center text-sm font-semibold text-utmb-navy underline underline-offset-4 dark:text-utmb-yellow"
       >
         Ver programação completa
       </Link>

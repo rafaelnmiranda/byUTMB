@@ -41,7 +41,7 @@ export default async function WeatherPage() {
 
       <div className="flex flex-col gap-4 px-4">
         <section className="flex flex-col items-center gap-3 rounded-xl bg-surface px-4 py-6 ring-1 ring-border-subtle">
-          <WeatherGlyph icon={current.icon} className="h-16 w-16 text-utmb-blue dark:text-utmb-yellow" />
+          <WeatherGlyph icon={current.icon} className="h-16 w-16 text-utmb-navy dark:text-utmb-yellow" />
 
           <p className="text-5xl font-extrabold tabular-nums text-foreground">
             {Math.round(current.temp)}°

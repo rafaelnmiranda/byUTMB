@@ -1,47 +1,63 @@
 @import "tailwindcss";
 
-@theme {
-  /* Cores da marca, extraídas do asset catalog do app iOS */
-  --color-utmb-blue: #002d74;
-  --color-utmb-blue-soft: #1b4b96;
-  --color-utmb-yellow: #ffc629;
-  --color-utmb-green: #00c4b3;
+/*
+ * O tema é decidido pelo atributo `data-theme` no <html>, escrito por um script
+ * que roda antes da pintura (ver ThemeScript). Assim o botão de tema manda mais
+ * que a preferência do sistema, e não há piscada de tela clara ao carregar.
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-  /* Cores por tipo de evento — com contraste suficiente nos dois temas */
+@theme {
+  /* Paleta da marca, amostrada do logo oficial do evento */
+  --color-utmb-navy: #002d74;
+  --color-utmb-navy-deep: #001a48;
+  --color-utmb-navy-soft: #1b4b96;
+  --color-utmb-yellow: #ffc629;
+  --color-utmb-yellow-deep: #e0a400;
+  --color-utmb-teal: #00c4b3;
+  --color-utmb-teal-deep: #06695f;
+
+  /* Cores por tipo de evento, derivadas da marca e com contraste nos dois temas */
   --color-esporte: #1b4b96;
-  --color-esporte-dark: #7ba7e8;
-  --color-entretenimento: #a8620a;
+  --color-esporte-dark: #8fb6f5;
+  --color-entretenimento: #9a5a00;
   --color-entretenimento-dark: #ffc629;
-  --color-ativacao: #0c7168;
-  --color-ativacao-dark: #35d9c9;
+  --color-ativacao: #06695f;
+  --color-ativacao-dark: #3ee0cf;
 }
 
-:root {
-  --background: #f4f5f7;
+:root,
+:root[data-theme="light"] {
+  --background: #eef1f7;
   --surface: #ffffff;
-  --foreground: #14161a;
-  --muted: #5b6270;
-  --border: #e3e5ea;
+  --surface-raised: #ffffff;
+  --foreground: #0f1729;
+  --muted: #5a6478;
+  --border: #dee3ee;
+  --accent: #002d74;
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0d11;
-    --surface: #161920;
-    --foreground: #f1f2f4;
-    --muted: #9aa1ae;
-    --border: #262a33;
-    color-scheme: dark;
-  }
+/* Escuro em navy, não em cinza — é o que faz o app parecer da marca */
+:root[data-theme="dark"] {
+  --background: #070d1c;
+  --surface: #101a33;
+  --surface-raised: #16223f;
+  --foreground: #eaeef7;
+  --muted: #93a0ba;
+  --border: #1d2a49;
+  --accent: #ffc629;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-border-subtle: var(--border);
+  --color-accent: var(--accent);
 }
 
 body {
@@ -59,6 +75,12 @@ input,
 select,
 textarea {
   font-size: 16px;
+}
+
+/* Foco visível e na cor da marca, para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {

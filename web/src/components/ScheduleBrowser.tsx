@@ -54,7 +54,7 @@ export function ScheduleBrowser({ events, days, initialDay }: Props) {
                 onClick={() => setSelectedDay(day.key)}
                 className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
                   active
-                    ? "bg-utmb-blue text-white dark:bg-utmb-yellow dark:text-utmb-blue"
+                    ? "bg-utmb-navy text-white dark:bg-utmb-yellow dark:text-utmb-navy"
                     : "bg-surface text-muted ring-1 ring-border-subtle"
                 }`}
               >

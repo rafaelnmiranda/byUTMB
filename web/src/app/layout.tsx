@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
 import { TabBar } from "@/components/TabBar";
+import { ThemeScript } from "@/components/theme";
 
 import "./globals.css";
 
@@ -34,8 +35,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0d11" },
+    { media: "(prefers-color-scheme: light)", color: "#eef1f7" },
+    { media: "(prefers-color-scheme: dark)", color: "#070d1c" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -44,7 +45,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className="h-full">
+    <html lang="pt-BR" className="h-full" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body>
         <div className="mx-auto flex min-h-dvh max-w-2xl flex-col">{children}</div>
         <TabBar />

@@ -22,7 +22,7 @@ export function EventCard({ event, badge }: { event: EventItem; badge?: string }
             {formatTimeRange(event.startsAt, event.endsAt)}
           </span>
           {badge && (
-            <span className="rounded-full bg-utmb-yellow px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-utmb-blue">
+            <span className="rounded-full bg-utmb-yellow px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-utmb-navy">
               {badge}
             </span>
           )}

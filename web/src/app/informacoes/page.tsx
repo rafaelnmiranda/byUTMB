@@ -100,7 +100,7 @@ function ExternalRow({
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className="-m-4 flex items-center gap-3 p-4 transition active:bg-foreground/5"
     >
-      <span className="shrink-0 text-utmb-blue dark:text-utmb-yellow">{icon}</span>
+      <span className="shrink-0 text-utmb-navy dark:text-utmb-yellow">{icon}</span>
       <span className="min-w-0 flex-1">
         <span className="block truncate text-[15px] font-semibold text-foreground">{title}</span>
         {subtitle && <span className="block text-xs text-muted">{subtitle}</span>}

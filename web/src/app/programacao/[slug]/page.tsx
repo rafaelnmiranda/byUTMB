@@ -47,7 +47,7 @@ export default async function EventPage({ params }: Props) {
       <div className="px-4 pt-[max(1rem,env(safe-area-inset-top))]">
         <Link
           href="/programacao"
-          className="inline-flex items-center gap-1 py-2 text-sm font-semibold text-utmb-blue dark:text-utmb-yellow"
+          className="inline-flex items-center gap-1 py-2 text-sm font-semibold text-utmb-navy dark:text-utmb-yellow"
         >
           ← Programação
         </Link>
@@ -92,7 +92,7 @@ export default async function EventPage({ params }: Props) {
         <div className="flex flex-wrap gap-2">
           <a
             href={`/api/eventos/${event.slug}/ics`}
-            className="inline-flex items-center gap-2 rounded-full bg-utmb-blue px-4 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-blue"
+            className="inline-flex items-center gap-2 rounded-full bg-utmb-navy px-4 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-navy"
           >
             <CalendarPlusIcon className="h-4 w-4" />
             Adicionar à agenda

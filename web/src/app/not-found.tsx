@@ -5,7 +5,7 @@ export const metadata = { title: "Página não encontrada" };
 export default function NotFound() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
-      <p className="text-5xl font-extrabold text-utmb-blue dark:text-utmb-yellow">404</p>
+      <p className="text-5xl font-extrabold text-utmb-navy dark:text-utmb-yellow">404</p>
 
       <h1 className="text-xl font-bold text-foreground">Página não encontrada</h1>
       <p className="max-w-xs text-sm text-muted">
@@ -14,7 +14,7 @@ export default function NotFound() {
 
       <Link
         href="/programacao"
-        className="rounded-full bg-utmb-blue px-5 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-blue"
+        className="rounded-full bg-utmb-navy px-5 py-2.5 text-sm font-semibold text-white dark:bg-utmb-yellow dark:text-utmb-navy"
       >
         Ver programação
       </Link>

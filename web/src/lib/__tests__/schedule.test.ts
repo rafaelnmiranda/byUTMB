@@ -123,3 +123,44 @@ describe("tolerância a planilha malformada", () => {
     expect(schedule.skipped).toBe(2);
   });
 });
+
+describe("agenda oficial de 2026", () => {
+  const csv = readFileSync(join(__dirname, "fixtures/agenda-2026.csv"), "utf8");
+  const schedule = buildSchedule(csv);
+
+  it("carrega os 39 itens sem descartar linha", () => {
+    expect(schedule.events).toHaveLength(39);
+    expect(schedule.skipped).toBe(0);
+  });
+
+  it("cobre os 4 dias oficiais, 17 a 20 de setembro", () => {
+    expect(schedule.days.map((day) => day.key)).toEqual([
+      "2026-09-17",
+      "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
+    ]);
+  });
+
+  it("tem entretenimento e ativação em todos os dias", () => {
+    for (const day of schedule.days) {
+      const doDia = schedule.events.filter((event) => event.dayKey === day.key);
+
+      expect(doDia.some((event) => event.type === "entretenimento")).toBe(true);
+      expect(doDia.some((event) => event.type === "ativacao")).toBe(true);
+    }
+  });
+
+  it("mantém a largada da PTR 108 na sexta às 19:00 de Paraty", () => {
+    const largada = schedule.events.find((event) => event.title === "Largada PTR 108");
+
+    expect(largada?.startsAt).toBe("2026-09-18T22:00:00.000Z");
+    expect(largada?.type).toBe("esporte");
+    expect(largada?.featured).toBe(true);
+  });
+
+  it("marca as largadas e cerimônias como destaque", () => {
+    const destaques = schedule.events.filter((event) => event.featured);
+    expect(destaques.length).toBeGreaterThanOrEqual(10);
+  });
+});
