@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { PageHeader, UpdatedAt } from "@/components/PageHeader";
 import { ScheduleBrowser } from "@/components/ScheduleBrowser";
 import { formatDateRange, formatUpdatedAt } from "@/lib/format";
-import { EVENT_TIMEZONE, getSchedule } from "@/lib/schedule";
+import { EVENT_TIMEZONE } from "@/lib/schedule";
+import { getSchedule } from "@/lib/schedule.server";
 
 export const metadata: Metadata = {
   title: "Programação",
@@ -28,7 +29,7 @@ export default async function SchedulePage() {
     <main className="flex flex-1 flex-col">
       <PageHeader title="Programação" subtitle={formatDateRange(days.map((day) => day.key))} />
 
-      <div className="px-4">
+      <div className="px-4 pt-3">
         <ScheduleBrowser events={events} days={days} initialDay={pickInitialDay(days)} />
       </div>
 

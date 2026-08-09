@@ -65,16 +65,19 @@ export default async function WeatherPage() {
               {forecast.map((day) => (
                 <li
                   key={day.dayKey}
-                  className="flex items-center gap-3 border-t border-border-subtle px-2 py-3 first:border-t-0"
+                  className="flex items-start gap-3 border-t border-border-subtle px-2 py-3 first:border-t-0"
                 >
-                  <span className="w-24 shrink-0 text-sm font-semibold text-foreground">
+                  <span className="w-24 shrink-0 pt-0.5 text-sm font-semibold text-foreground">
                     {formatDayShort(day.dayKey)}
                   </span>
-                  <WeatherGlyph icon={day.icon} className="h-5 w-5 shrink-0 text-muted" />
-                  <span className="min-w-0 flex-1 truncate text-xs text-muted">
-                    {capitalizeFirst(day.description)}
-                  </span>
-                  <span className="shrink-0 text-sm tabular-nums">
+                  <WeatherGlyph icon={day.icon} className="mt-0.5 h-5 w-5 shrink-0 text-muted" />
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-xs text-muted">{capitalizeFirst(day.description)}</p>
+                    <p className="mt-0.5 text-[11px] tabular-nums text-muted">
+                      {day.humidity}% umid. · {day.windSpeedKmh} km/h vento
+                    </p>
+                  </div>
+                  <span className="shrink-0 pt-0.5 text-sm tabular-nums">
                     <span className="text-muted">{Math.round(day.min)}°</span>
                     <span className="mx-1 text-muted/40">/</span>
                     <span className="font-semibold text-foreground">{Math.round(day.max)}°</span>

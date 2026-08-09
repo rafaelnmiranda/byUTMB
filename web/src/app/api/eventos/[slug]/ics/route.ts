@@ -1,4 +1,4 @@
-import { getSchedule } from "@/lib/schedule";
+import { getSchedule } from "@/lib/schedule.server";
 
 /**
  * Arquivo .ics do evento — "adicionar à agenda".
@@ -26,7 +26,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
     `UID:${event.slug}@paratybrazil.utmb`,
     `DTSTAMP:${toICSDate(new Date().toISOString())}`,
     `DTSTART:${toICSDate(event.startsAt)}`,
-    `DTEND:${toICSDate(event.endsAt)}`,
+    event.endsAt ? `DTEND:${toICSDate(event.endsAt)}` : `DURATION:PT15M`,
     foldLine(`SUMMARY:${escapeICS(event.title)}`),
     event.description ? foldLine(`DESCRIPTION:${escapeICS(event.description)}`) : null,
     event.location ? foldLine(`LOCATION:${escapeICS(event.location)}`) : null,

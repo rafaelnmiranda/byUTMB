@@ -16,8 +16,23 @@ export function formatTime(iso: string): string {
   }).format(new Date(iso));
 }
 
-export function formatTimeRange(startIso: string, endIso: string): string {
-  return `${formatTime(startIso)} – ${formatTime(endIso)}`;
+export function formatTimeRange(startIso: string, endIso: string | null): string {
+  const start = formatTime(startIso);
+  if (!endIso) return start;
+  return `${start} – ${formatTime(endIso)}`;
+}
+
+/** Horário + duração opcional para a tela de detalhe. */
+export function formatEventSchedule(
+  startIso: string,
+  endIso: string | null,
+  durationSeconds: number | null,
+): string {
+  if (!endIso || durationSeconds === null) {
+    return formatTime(startIso);
+  }
+
+  return `${formatTimeRange(startIso, endIso)} · ${formatDuration(durationSeconds)}`;
 }
 
 /**

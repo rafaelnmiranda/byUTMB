@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 
+import { InfoHelp } from "@/components/InfoHelp";
 import { PageHeader } from "@/components/PageHeader";
 import { ChevronIcon, LinkIcon, PinIcon } from "@/components/icons";
 import { formatDateRange } from "@/lib/format";
-import { getSchedule } from "@/lib/schedule";
+import { getSchedule } from "@/lib/schedule.server";
 
 export const metadata: Metadata = {
   title: "Informações",
-  description: "Sobre o Paraty Brazil by UTMB: local, site oficial e contato.",
+  description:
+    "Ajuda para usar o app, sobre o Paraty Brazil by UTMB, local, site oficial e contato.",
 };
 
 const ABOUT =
@@ -27,6 +29,8 @@ export default async function InfoPage() {
             <p className="text-[15px] font-semibold text-foreground">{dateRange}</p>
           </Section>
         )}
+
+        <InfoHelp />
 
         <Section title="Sobre o evento">
           <p className="text-[15px] leading-relaxed text-foreground">{ABOUT}</p>

@@ -1,5 +1,4 @@
-import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
+import { BrandBar } from "./BrandBar";
 
 export function PageHeader({
   title,
@@ -11,23 +10,23 @@ export function PageHeader({
   children?: React.ReactNode;
 }) {
   return (
-    <header className="px-4 pb-4 pt-[max(1rem,env(safe-area-inset-top))]">
-      {/* Faixa da marca: logo à esquerda, controle de tema à direita */}
-      <div className="mb-3 flex items-center justify-between">
-        <Logo className="h-7" />
-        <ThemeToggle />
-      </div>
+    <>
+      <BrandBar />
 
-      <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-foreground">
-        {title}
-      </h1>
-      {subtitle && <p className="mt-0.5 text-sm text-muted">{subtitle}</p>}
+      {/* Conteúdo da página: sobe levemente sobre o navy, como na home */}
+      <header className="bg-screen-gradient relative z-10 -mt-2 px-4 pb-4 pt-5">
+        <h1 className="text-[26px] font-extrabold leading-tight tracking-tight text-utmb-navy dark:text-foreground">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="mt-0.5 text-sm text-utmb-navy-deep/75 dark:text-foreground/80">{subtitle}</p>
+        )}
 
-      {/* Régua amarela curta — assinatura visual da marca */}
-      <span aria-hidden className="mt-3 block h-1 w-10 rounded-full bg-utmb-yellow" />
+        <span aria-hidden className="mt-3 block h-1 w-10 rounded-full bg-utmb-yellow" />
 
-      {children}
-    </header>
+        {children}
+      </header>
+    </>
   );
 }
 

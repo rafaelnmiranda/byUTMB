@@ -2,8 +2,8 @@
 ## App **Paraty Brazil by UTMB**
 
 > Decisão tomada em agosto/2026: **abandonar a distribuição via App Store e construir um
-> PWA** (site instalável, adaptável a celular). Contexto e comparação de alternativas em
-> [`PLANO_RETOMADA.md`](PLANO_RETOMADA.md).
+> PWA** (site instalável, adaptável a celular). O app iOS Swift foi removido do repositório
+> em agosto/2026; backup em tag `backup/pre-ios-removal-*` e branch `backup/ios-completo-*`.
 
 ---
 
@@ -309,22 +309,22 @@ que o app nativo nunca teve — o atleta chega no conteúdo em 2 segundos, sem i
 
 ---
 
-## 10. O que acontece com o app iOS
+## 10. App iOS (removido)
 
-O código Swift **fica no repositório** como referência histórica — os textos, as cores da
-marca, o schema do CSV e a estrutura de navegação foram todos aproveitados na migração.
-Não vale apagar agora.
+O código Swift foi **removido do repositório** em agosto/2026. Textos, cores da marca,
+schema do CSV e navegação já foram migrados para o PWA em `web/`.
 
-Do plano antigo, o que **continua valendo**:
+**Backup para restaurar:** tag `backup/pre-ios-removal-*`, branch `backup/ios-completo-*`,
+ou tarball `~/Desktop/byUTMB-ios-backup-*.tar.gz`.
 
-- **§2.1 — revogar as chaves da NASA e da OpenWeatherMap.** Continua urgente e independe da
-  migração: elas estão num repositório público. Fazer hoje.
-- **Política de privacidade** — deixa de ser exigência da Apple, mas volta como exigência da
-  LGPD assim que os cupons guardarem nome e e-mail.
+O que **continua valendo**:
 
-O que **morre com a decisão**: carta de autorização da UTMB para a App Store, bundle ID,
-screenshots, nutrition labels, TestFlight, scheme compartilhado, CI de build no macOS,
-deployment target — tudo isso era custo de loja, e a loja saiu.
+- **Revogar chaves da NASA e da OpenWeatherMap** se ainda estiverem ativas — estão no
+  histórico Git de um repositório público.
+- **Política de privacidade** — exigência da LGPD assim que cupons guardarem nome e e-mail.
+
+O que **morreu com a decisão**: App Store, bundle ID, TestFlight, CI Xcode — custo de loja
+eliminado.
 
 ---
 

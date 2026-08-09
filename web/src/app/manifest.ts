@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Paraty Brazil by UTMB",
     short_name: "Paraty by UTMB",
     description:
-      "Programação, informações e previsão do tempo do Paraty Brazil by UTMB — trail running em Paraty, RJ.",
+      "Programação, mapa, informações e previsão do tempo do Paraty Brazil by UTMB — trail running em Paraty, RJ.",
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -22,6 +22,8 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     shortcuts: [
       { name: "Programação", url: "/programacao" },
+      { name: "Mapa do evento", url: "/mapa" },
+      { name: "Parcerias (descontos)", url: "/onde-comer" },
       { name: "Previsão do tempo", url: "/previsao" },
     ],
   };

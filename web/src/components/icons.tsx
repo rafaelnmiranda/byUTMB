@@ -51,6 +51,40 @@ export function InfoIcon(props: IconProps) {
   );
 }
 
+export function MapIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="m3 6 5-3 8 3 5-3v15l-5 3-8-3-5 3Z" />
+      <path d="M8 3v15M16 6v15" />
+    </svg>
+  );
+}
+
+export function UtensilsIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M6 3v8a3 3 0 0 0 6 0V3M9 11v10M18 3v7a3 3 0 0 1-6 0V3M15 10v11" />
+    </svg>
+  );
+}
+
+export function DollarIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 2v20M17 6.5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H7" />
+    </svg>
+  );
+}
+
+export function TagIcon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M20 12 12 20l-8-8V4h8l8 8Z" />
+      <circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function ClockIcon(props: IconProps) {
   return (
     <svg {...base} {...props}>

@@ -2,11 +2,11 @@ import { parseCSVToObjects } from "./csv";
 
 export const EVENT_TIMEZONE = "America/Sao_Paulo";
 
-/** Quanto tempo (em segundos) o servidor guarda a planilha antes de buscar de novo. */
-const REVALIDATE_SECONDS = 300;
-
-/** Duração padrão quando a planilha não informa (1 h). */
+/** Duração padrão quando a planilha informa duração inválida (1 h). */
 const DEFAULT_DURATION_SECONDS = 3600;
+
+/** Sem duração na planilha = evento pontual (largada, limite…) — só horário de início. */
+const POINT_EVENT_LIVE_MS = 45 * 60 * 1000;
 
 export type EventType = "esporte" | "entretenimento" | "ativacao";
 
@@ -16,13 +16,16 @@ export interface EventItem {
   description: string;
   /** Instante de início em ISO/UTC. */
   startsAt: string;
-  /** Instante de término em ISO/UTC. */
-  endsAt: string;
-  durationSeconds: number;
+  /** Instante de término em ISO/UTC. `null` quando a planilha não informa horário final. */
+  endsAt: string | null;
+  /** Segundos derivados do intervalo. `null` = evento pontual, exibido só com horário de início. */
+  durationSeconds: number | null;
   location: string;
   type: EventType;
-  /** Nome de asset local ou URL absoluta. `null` quando a planilha não informa. */
+  /** Nome de asset local, URL absoluta, ou `null`. Resolvido na UI via `resolveEventImage`. */
   image: string | null;
+  /** Caminho/URL pronto para `<Image>` — preenchido em `getSchedule()`. */
+  imageUrl: string | null;
   link: string | null;
   featured: boolean;
   /** Dia do evento no fuso de Paraty, formato `YYYY-MM-DD`. Usado para agrupar. */
@@ -52,31 +55,9 @@ export const EVENT_TYPE_LABELS: Record<EventType, string> = {
 };
 
 /**
- * Busca a programação na planilha publicada do Google Sheets.
- *
- * O celular do atleta nunca fala com o Google: o CSV é lido e interpretado aqui,
- * no servidor, e o navegador recebe HTML pronto.
+ * Monta a programação a partir de CSV. Para buscar na planilha ao vivo, use
+ * `getSchedule()` em `schedule.server.ts`.
  */
-export async function getSchedule(): Promise<Schedule> {
-  const url = process.env.SCHEDULE_CSV_URL;
-
-  if (!url) {
-    // Sem configuração, a página ainda renderiza (vazia) em vez de estourar erro 500.
-    return { events: [], days: [], fetchedAt: new Date().toISOString(), skipped: 0 };
-  }
-
-  const response = await fetch(url, {
-    next: { revalidate: REVALIDATE_SECONDS, tags: ["schedule"] },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Falha ao carregar a programação (HTTP ${response.status})`);
-  }
-
-  return buildSchedule(await response.text());
-}
-
-/** Separado de `getSchedule` para poder ser testado sem rede. */
 export function buildSchedule(csv: string): Schedule {
   const rows = parseCSVToObjects(csv);
   const events: EventItem[] = [];
@@ -126,19 +107,40 @@ function toEvent(row: Record<string, string>, usedSlugs: Set<string>): EventItem
   const start = zonedWallTimeToUTC(dayKey, hhmm);
   if (Number.isNaN(start.getTime())) return null;
 
-  const durationSeconds = parseDuration(row["duracao"]);
-  const end = new Date(start.getTime() + durationSeconds * 1000);
+  const explicitEndTime = normalizeTime(row["hora_final"] ?? "");
+  let durationSeconds: number | null;
+  let end: string | null;
+
+  if (explicitEndTime) {
+    let endDate = zonedWallTimeToUTC(dayKey, explicitEndTime);
+
+    // Um horário final anterior ao início indica que a atividade termina no dia seguinte.
+    if (endDate.getTime() < start.getTime()) {
+      endDate = new Date(endDate.getTime() + 24 * 60 * 60 * 1000);
+    }
+
+    durationSeconds = Math.round((endDate.getTime() - start.getTime()) / 1000);
+    end = endDate.toISOString();
+  } else {
+    // Compatibilidade com planilhas antigas, que ainda informam duração em segundos.
+    durationSeconds = parseDuration(row["duracao"]);
+    end =
+      durationSeconds === null
+        ? null
+        : new Date(start.getTime() + durationSeconds * 1000).toISOString();
+  }
 
   return {
     slug: uniqueSlug(`${slugify(title)}-${dayKey.slice(5).replace("-", "")}${hhmm.replace(":", "")}`, usedSlugs),
     title,
     description: row["descricao"] ?? "",
     startsAt: start.toISOString(),
-    endsAt: end.toISOString(),
+    endsAt: end,
     durationSeconds,
     location: row["local"] ?? "",
     type: parseType(row["tipo"]),
-    image: row["imagem"] || null,
+    image: row["imagem"]?.trim() || null,
+    imageUrl: null,
     link: row["link"] || null,
     featured: /^(sim|yes|true|x|1)$/i.test(row["destaque"] ?? ""),
     dayKey,
@@ -170,9 +172,25 @@ function normalizeTime(raw: string): string | null {
   return `${pad(hours)}:${pad(minutes)}`;
 }
 
-function parseDuration(raw: string | undefined): number {
-  const value = Number((raw ?? "").trim());
+function parseDuration(raw: string | undefined): number | null {
+  const trimmed = (raw ?? "").trim();
+  if (!trimmed) return null;
+
+  const value = Number(trimmed);
   return Number.isFinite(value) && value > 0 ? value : DEFAULT_DURATION_SECONDS;
+}
+
+/** Evento está acontecendo agora? */
+export function isEventLive(event: EventItem, now: number): boolean {
+  const start = new Date(event.startsAt).getTime();
+  if (now < start) return false;
+
+  if (event.endsAt) {
+    return now < new Date(event.endsAt).getTime();
+  }
+
+  // Largadas e similares: "ao vivo" por uma janela curta após o início.
+  return now < start + POINT_EVENT_LIVE_MS;
 }
 
 function parseType(raw: string | undefined): EventType {

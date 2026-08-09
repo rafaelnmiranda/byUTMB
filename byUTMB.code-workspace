@@ -1,0 +1,16 @@
+iss{
+  "folders": [
+    { "path": ".", "name": "Paraty by UTMB" }
+  ],
+  "settings": {
+    "terminal.integrated.cwd": "${workspaceFolder}/web",
+    "files.exclude": {
+      "**/.next": true,
+      "**/node_modules": true
+    },
+    "search.exclude": {
+      "**/.next": true,
+      "**/node_modules": true
+    }
+  }
+}

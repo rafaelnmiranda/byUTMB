@@ -24,6 +24,9 @@ export interface ForecastDay {
   dayKey: string;
   min: number;
   max: number;
+  humidity: number;
+  /** Velocidade máxima prevista no dia, em km/h. */
+  windSpeedKmh: number;
   icon: WeatherIcon;
   description: string;
 }
@@ -90,13 +93,24 @@ function groupByDay(list: OpenWeatherForecast["list"]): ForecastDay[] {
     day: "2-digit",
   });
 
-  const days = new Map<string, { temps: number[]; ids: number[]; descriptions: string[] }>();
+  const days = new Map<
+    string,
+    { temps: number[]; humidities: number[]; windSpeedsMs: number[]; ids: number[]; descriptions: string[] }
+  >();
 
   for (const entry of list) {
     const dayKey = formatter.format(new Date(entry.dt * 1000));
-    const bucket = days.get(dayKey) ?? { temps: [], ids: [], descriptions: [] };
+    const bucket = days.get(dayKey) ?? {
+      temps: [],
+      humidities: [],
+      windSpeedsMs: [],
+      ids: [],
+      descriptions: [],
+    };
 
     bucket.temps.push(entry.main.temp_min, entry.main.temp_max);
+    bucket.humidities.push(entry.main.humidity);
+    if (entry.wind?.speed != null) bucket.windSpeedsMs.push(entry.wind.speed);
     bucket.ids.push(entry.weather[0]?.id ?? 800);
     bucket.descriptions.push(entry.weather[0]?.description ?? "");
     days.set(dayKey, bucket);
@@ -106,6 +120,10 @@ function groupByDay(list: OpenWeatherForecast["list"]): ForecastDay[] {
     dayKey,
     min: Math.min(...bucket.temps),
     max: Math.max(...bucket.temps),
+    humidity: Math.round(
+      bucket.humidities.reduce((sum, value) => sum + value, 0) / bucket.humidities.length,
+    ),
+    windSpeedKmh: Math.round(Math.max(...bucket.windSpeedsMs, 0) * 3.6),
     // O pior tempo do dia é o que interessa para quem vai correr na serra.
     icon: toIcon(Math.min(...bucket.ids)),
     description: bucket.descriptions[Math.floor(bucket.descriptions.length / 2)] ?? "",
@@ -141,6 +159,19 @@ interface OpenWeatherCurrent {
   weather: OpenWeatherCondition[];
 }
 
+interface OpenWeatherWind {
+  speed: number;
+  deg?: number;
+  gust?: number;
+}
+
+interface OpenWeatherForecastEntry {
+  dt: number;
+  main: OpenWeatherMain;
+  weather: OpenWeatherCondition[];
+  wind?: OpenWeatherWind;
+}
+
 interface OpenWeatherForecast {
-  list: { dt: number; main: OpenWeatherMain; weather: OpenWeatherCondition[] }[];
+  list: OpenWeatherForecastEntry[];
 }

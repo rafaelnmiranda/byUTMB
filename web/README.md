@@ -1,6 +1,6 @@
 # Paraty Brazil by UTMB — PWA
 
-Site instalável (PWA) do evento. Substitui o app iOS nativo que está em `../byUTMB`.
+Site instalável (PWA) do evento **Paraty Brazil by UTMB**.
 Contexto da decisão e roteiro: [`../docs/PLANO_PWA.md`](../docs/PLANO_PWA.md).
 
 Next.js 16 (App Router) · React 19 · Tailwind 4 · TypeScript · Vitest
@@ -18,7 +18,7 @@ npm run dev
 | `npm run dev` | Servidor de desenvolvimento |
 | `npm run build` | Build de produção |
 | `npm test` | Testes do parser e da formatação |
-| `npm run lint` | ESLint |
+| `npm run images:optimize` | Converte JPG/PNG de `public/images/` para WebP |
 
 > O service worker só é registrado em produção (`npm run build && npm run start`),
 > para não atrapalhar o hot reload.
@@ -60,6 +60,7 @@ Veja [`.env.example`](.env.example). Nenhuma chave entra no Git.
 | Variável | Obrigatória | Uso |
 |---|---|---|
 | `SCHEDULE_CSV_URL` | recomendada | Planilha da programação em CSV. Sem ela o app sobe com a programação vazia |
+| `PARTNERS_CSV_URL` | opcional | Aba `parceiros` em CSV. Se omitida, deriva da mesma planilha da programação |
 | `OPENWEATHER_API_KEY` | opcional | Previsão do tempo. Sem ela, só a aba Previsão fica indisponível |
 | `NEXT_PUBLIC_SITE_URL` | recomendada | Metadados e URLs absolutas dos links compartilhados |
 
@@ -81,14 +82,21 @@ Google Sheets (produção edita)
 O celular do atleta nunca fala com o Google Sheets nem com a OpenWeatherMap — as
 chaves ficam no servidor.
 
+**Benefícios de parceiros:** o catálogo fica em `/onde-comer`. O resgate presencial
+é `/p/{slug}?k=…` (QR impresso). Regras e operação:
+[`../docs/RESGATE_BENEFICIOS.md`](../docs/RESGATE_BENEFICIOS.md). Admin: `/admin/qrs`
+(impressão) e `/admin/resgates` (métricas agregadas).
+
 ### Colunas da planilha
 
-`data, hora, titulo, descricao, local, duracao, tipo, imagem` e, opcionalmente,
+`data, hora, titulo, descricao, local, hora_final, tipo, imagem` e, opcionalmente,
 `link` e `destaque`.
 
 - `data`: `2025-09-18` ou `18/09/2025`
 - `hora`: `07:30` ou `7:30`
-- `duracao`: em segundos; vazio vira 1 h
+- `hora_final`: `18:00` ou `18:00:00`; **vazio = só horário de início**
+  (largadas, limites de chegada…)
+- `duracao`: formato antigo em segundos, ainda aceito para compatibilidade
 - `tipo`: `esporte`, `entretenimento` ou `ativacao` (acento e maiúscula toleradas)
 - Horários são interpretados no fuso de Paraty e exibidos nele, qualquer que seja o
   fuso do aparelho
@@ -101,11 +109,12 @@ planilha fica difícil de revisar.
 
 ## Ícones
 
-Gerados a partir do ícone do app iOS. Para refazer:
+Arquivos em `public/icons/` (`icon-192.png`, `icon-512.png`, `maskable-512.png`,
+`apple-touch-icon.png`). Para regenerar a partir de um PNG 1024×1024:
 
 ```bash
 npm i -D sharp
-node -e "const s=require('sharp');const src='../byUTMB/Assets.xcassets/AppIcon.appiconset/1024.png';\
+node -e "const s=require('sharp');const src='caminho/para/icon-1024.png';\
 [192,512].forEach(n=>s(src).resize(n,n).png().toFile('public/icons/icon-'+n+'.png'));\
 s(src).resize(180,180).png().toFile('public/icons/apple-touch-icon.png');"
 npm uninstall sharp

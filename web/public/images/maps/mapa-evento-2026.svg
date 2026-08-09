@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Mapa do Paraty Brazil by UTMB 2026</title>
+  <desc id="desc">Mapa ilustrado mostrando a Arena na Praça da Matriz, a Ponte do Pontal sobre o Rio Perequê-Açu e a Expo no Areal do Pontal.</desc>
+  <defs>
+    <pattern id="water" width="48" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 13c8-7 16-7 24 0s16 7 24 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/>
+    </pattern>
+    <pattern id="cobble" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M0 16h32M16 0v16M8 16v16M24 16v16" fill="none" stroke="#cfd5df" stroke-width="2"/>
+    </pattern>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#001a48" flood-opacity=".12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0l10 5-10 5z" fill="#ffc629"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #001a48; }
+      .area-title { font-size: 30px; font-weight: 800; letter-spacing: -.5px; }
+      .area-subtitle { font-size: 15px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
+      .place { font-size: 18px; font-weight: 750; }
+      .small { font-size: 14px; font-weight: 650; }
+      .tiny { font-size: 12px; font-weight: 700; letter-spacing: .4px; }
+      .white { fill: #fff; }
+      .muted { fill: #536174; }
+      .booth { fill: #00bcae; stroke: #fff; stroke-width: 4; rx: 10; }
+      .service { fill: #fff; stroke: #d9e0e9; stroke-width: 3; }
+      .route { fill: none; stroke: #ffc629; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#f3f6fa"/>
+
+  <!-- Cabeçalho -->
+  <rect width="1600" height="112" fill="#001a48"/>
+  <text x="54" y="53" class="white" font-size="17" font-weight="800" letter-spacing="2.4">PARATY BRAZIL BY UTMB 2026</text>
+  <text x="54" y="88" class="white" font-size="32" font-weight="800">Mapa do evento</text>
+  <g transform="translate(1322 25)">
+    <path d="M0 53 35 13l20 23 25-32 45 49z" fill="none" stroke="#00c4b3" stroke-width="7" stroke-linejoin="round"/>
+    <text x="142" y="28" text-anchor="end" class="white" font-size="14" font-weight="800">ARENA + EXPO</text>
+    <text x="142" y="49" text-anchor="end" fill="#ffc629" font-size="13" font-weight="800">17–20 SET</text>
+  </g>
+
+  <!-- Contexto urbano -->
+  <path d="M0 220h735v630H0z" fill="#edf0f3"/>
+  <path d="M865 220h735v630H865z" fill="#eaf2ec"/>
+  <path d="M735 112h130v775c-18 30-21 66 0 113H735c18-37 16-78 0-113z" fill="#16a9dc"/>
+  <path d="M735 112h130v888H735z" fill="url(#water)"/>
+  <text transform="translate(805 346) rotate(90)" text-anchor="middle" class="white" font-size="17" font-weight="800" letter-spacing="3">RIO PEREQUÊ-AÇU</text>
+
+  <!-- Ruas e ciclovia -->
+  <path d="M36 189h650M36 889h650M914 189h642M914 889h642" stroke="#fff" stroke-width="24"/>
+  <path d="M36 189h650M36 889h650M914 189h642M914 889h642" stroke="#c8ced8" stroke-width="2" stroke-dasharray="14 10"/>
+  <text x="52" y="180" class="tiny muted">CENTRO HISTÓRICO · PRAÇA DA MATRIZ</text>
+  <text x="1534" y="180" text-anchor="end" class="tiny muted">AREAL DO PONTAL · CICLOVIA</text>
+
+  <!-- Ponte -->
+  <g filter="url(#shadow)">
+    <path d="M682 495h236v82H682z" fill="#fff" stroke="#001a48" stroke-width="5"/>
+    <path d="M700 512h200M700 560h200" stroke="#00c4b3" stroke-width="5" stroke-dasharray="15 8"/>
+    <path d="M726 497v78M776 497v78M826 497v78M876 497v78" stroke="#d4dae4" stroke-width="3"/>
+  </g>
+  <text x="800" y="541" text-anchor="middle" font-size="17" font-weight="800">PONTE DO PONTAL</text>
+  <text x="800" y="597" text-anchor="middle" class="tiny muted">Travessia de pedestres</text>
+
+  <!-- ARENA -->
+  <g filter="url(#shadow)">
+    <rect x="45" y="235" width="645" height="590" rx="26" fill="#fff"/>
+  </g>
+  <rect x="45" y="235" width="645" height="86" rx="26" fill="#002d74"/>
+  <path d="M45 295v26h645v-26z" fill="#002d74"/>
+  <text x="76" y="273" class="white area-title">ARENA</text>
+  <text x="76" y="300" fill="#6fe6dc" class="area-subtitle">Praça da Matriz · largada e chegada</text>
+
+  <!-- Igreja / referência -->
+  <g transform="translate(78 350)">
+    <path d="M18 35V12h22V0h12v12h22v23M8 35h76v75H8z" fill="#f0e6cf" stroke="#b59a62" stroke-width="3"/>
+    <path d="M33 110V70h26v40M20 52h12v18H20zm40 0h12v18H60z" fill="#fff" stroke="#b59a62" stroke-width="2"/>
+    <text x="46" y="137" text-anchor="middle" class="tiny muted">IGREJA MATRIZ</text>
+  </g>
+
+  <!-- Corredor Arena -->
+  <rect x="196" y="350" width="454" height="92" rx="18" fill="#edf3fb" stroke="#b9c9e2" stroke-width="3"/>
+  <path d="M224 396h385" stroke="#002d74" stroke-width="7" stroke-dasharray="14 8"/>
+  <text x="423" y="378" text-anchor="middle" class="small">Pórtico de largada e chegada</text>
+  <text x="220" y="426" class="tiny" fill="#06695f">LARGADA</text>
+  <text x="603" y="426" text-anchor="end" class="tiny" fill="#9a5a00">CHEGADA</text>
+
+  <g transform="translate(196 466)">
+    <rect width="138" height="102" rx="14" fill="#00c4b3"/>
+    <circle cx="30" cy="31" r="16" fill="#fff"/>
+    <path d="M30 21v20M20 31h20" stroke="#002d74" stroke-width="5" stroke-linecap="round"/>
+    <text x="18" y="72" class="place">Posto médico</text>
+    <text x="18" y="91" class="tiny muted">Atendimento</text>
+  </g>
+  <g transform="translate(348 466)">
+    <rect width="138" height="102" rx="14" fill="#e7f8f5" stroke="#00a99d" stroke-width="3"/>
+    <path d="M27 18c-7 10-10 15-10 21a11 11 0 0 0 22 0c0-6-4-12-12-21z" fill="#16a9dc"/>
+    <text x="18" y="72" class="place">Chuveiros</text>
+    <text x="18" y="91" class="tiny muted">Pós-prova</text>
+  </g>
+  <g transform="translate(500 466)">
+    <rect width="150" height="102" rx="14" fill="#fff5d6" stroke="#ffc629" stroke-width="3"/>
+    <path d="M23 26h28M29 18v16M45 18v16" stroke="#002d74" stroke-width="4" stroke-linecap="round"/>
+    <text x="18" y="72" class="place">Banheiros</text>
+    <text x="18" y="91" class="tiny muted">Inclui PCD</text>
+  </g>
+
+  <g transform="translate(196 585)">
+    <rect width="214" height="105" rx="14" fill="#002d74"/>
+    <path d="M28 24c16-13 35-4 35 12 0 17-25 30-35 38-10-8-35-21-35-38 0-16 19-25 35-12z" transform="translate(18 -5) scale(.55)" fill="#ffc629"/>
+    <text x="68" y="37" class="white place">Recovery</text>
+    <text x="18" y="68" fill="#d8e6ff" class="small">Hidratação · finisher</text>
+    <text x="18" y="90" fill="#d8e6ff" class="tiny">Saída dos atletas</text>
+  </g>
+  <g transform="translate(426 585)">
+    <rect width="224" height="105" rx="14" fill="#f1e9fb" stroke="#7c2db8" stroke-width="3"/>
+    <text x="18" y="38" class="place">Área VIP</text>
+    <text x="18" y="66" class="small muted">Acesso controlado</text>
+    <text x="18" y="88" class="tiny muted">Apoio do evento</text>
+  </g>
+
+  <path d="M118 765h433c42 0 70-28 70-67" class="route"/>
+  <g transform="translate(76 730)">
+    <circle cx="38" cy="38" r="38" fill="#ffc629"/>
+    <path d="M22 38h32M43 27l11 11-11 11" fill="none" stroke="#001a48" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="88" y="34" class="place">Entrada da Arena</text>
+    <text x="88" y="55" class="tiny muted">Rua Mal. Santos Dias</text>
+  </g>
+
+  <!-- EXPO -->
+  <g filter="url(#shadow)">
+    <rect x="910" y="235" width="645" height="590" rx="26" fill="#fff"/>
+  </g>
+  <rect x="910" y="235" width="645" height="86" rx="26" fill="#00a99d"/>
+  <path d="M910 295v26h645v-26z" fill="#00a99d"/>
+  <text x="941" y="273" class="white area-title">EXPO</text>
+  <text x="941" y="300" class="white area-subtitle">Areal do Pontal · kits e experiência</text>
+
+  <!-- Galpão Expo -->
+  <rect x="942" y="350" width="414" height="335" rx="18" fill="#eaf9f7" stroke="#00a99d" stroke-width="4"/>
+  <text x="1149" y="381" text-anchor="middle" class="small" letter-spacing="1.2">EXPOSITORES E PARCEIROS</text>
+  <g>
+    <rect class="booth" x="966" y="405" width="105" height="68"/>
+    <rect class="booth" x="1085" y="405" width="105" height="68"/>
+    <rect class="booth" x="1204" y="405" width="128" height="68"/>
+    <rect class="booth" x="966" y="555" width="105" height="68"/>
+    <rect class="booth" x="1085" y="555" width="105" height="68"/>
+    <rect class="booth" x="1204" y="555" width="128" height="68"/>
+    <text x="1018" y="444" text-anchor="middle" class="white tiny">MARCAS</text>
+    <text x="1137" y="444" text-anchor="middle" class="white tiny">ATIVAÇÕES</text>
+    <text x="1268" y="444" text-anchor="middle" class="white tiny">EQUIPAMENTOS</text>
+    <text x="1018" y="594" text-anchor="middle" class="white tiny">CALÇADOS</text>
+    <text x="1137" y="594" text-anchor="middle" class="white tiny">NUTRIÇÃO</text>
+    <text x="1268" y="594" text-anchor="middle" class="white tiny">PARCEIROS</text>
+  </g>
+  <path d="M979 515h340" stroke="#002d74" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 18"/>
+  <text x="1149" y="531" text-anchor="middle" class="tiny muted">CORREDOR CENTRAL</text>
+
+  <!-- Serviços Expo -->
+  <g transform="translate(1380 350)">
+    <rect class="service" width="143" height="87" rx="14"/>
+    <path d="M20 23h24v24H20zM24 18h16" fill="none" stroke="#002d74" stroke-width="4"/>
+    <text x="18" y="65" class="place">Retirada</text>
+    <text x="18" y="81" class="tiny muted">de kits</text>
+  </g>
+  <g transform="translate(1380 451)">
+    <rect class="service" width="143" height="87" rx="14"/>
+    <path d="M18 39h31l-4-19H22zM25 20v-5h17v5" fill="none" stroke="#002d74" stroke-width="4"/>
+    <text x="18" y="65" class="place">Drop bag</text>
+    <text x="18" y="81" class="tiny muted">Entrega</text>
+  </g>
+  <g transform="translate(1380 552)">
+    <rect width="143" height="87" rx="14" fill="#002d74"/>
+    <path d="M19 19h31v27H19zM25 14h19" fill="none" stroke="#ffc629" stroke-width="4"/>
+    <text x="18" y="65" class="white place">Loja UTMB</text>
+    <text x="18" y="81" fill="#d8e6ff" class="tiny">Produtos oficiais</text>
+  </g>
+
+  <g transform="translate(942 705)">
+    <rect width="154" height="78" rx="14" fill="#fff5d6" stroke="#ffc629" stroke-width="3"/>
+    <path d="M22 20v24M37 20v24M22 32h15M48 20v24" stroke="#002d74" stroke-width="3"/>
+    <text x="61" y="31" class="place">Café</text>
+    <text x="61" y="52" class="tiny muted">Alimentação</text>
+  </g>
+  <g transform="translate(1110 705)">
+    <rect width="154" height="78" rx="14" fill="#e9f3ff" stroke="#16a9dc" stroke-width="3"/>
+    <path d="M29 16c-7 10-10 15-10 21a11 11 0 0 0 22 0c0-6-4-12-12-21z" fill="#16a9dc"/>
+    <text x="56" y="31" class="place">Água</text>
+    <text x="56" y="52" class="tiny muted">Hidratação</text>
+  </g>
+  <g transform="translate(1278 705)">
+    <rect width="77" height="78" rx="14" fill="#fff5d6" stroke="#ffc629" stroke-width="3"/>
+    <text x="38" y="32" text-anchor="middle" font-size="23" font-weight="800">WC</text>
+    <text x="38" y="55" text-anchor="middle" class="tiny muted">PCD</text>
+  </g>
+  <g transform="translate(1380 705)">
+    <rect width="143" height="78" rx="14" fill="#7c2db8"/>
+    <path d="M20 42V22l20-8 20 8v20" fill="none" stroke="#fff" stroke-width="4"/>
+    <text x="72" y="32" class="white place">Palco</text>
+    <text x="72" y="53" fill="#eee1fa" class="tiny">Programação</text>
+  </g>
+
+  <path d="M1454 792h-75c-25 0-41-12-41-36" class="route"/>
+  <text x="1456" y="815" text-anchor="end" class="place">Entrada da Expo</text>
+
+  <!-- Conexão indicada -->
+  <path d="M648 615c42-8 67-27 86-67M866 548c17 26 25 47 44 57" fill="none" stroke="#fff" stroke-width="17" stroke-linecap="round"/>
+  <path d="M648 615c42-8 67-27 86-67M866 548c17 26 25 47 44 57" fill="none" stroke="#ffc629" stroke-width="8" stroke-linecap="round" stroke-dasharray="12 10"/>
+
+  <!-- Rodapé/legenda -->
+  <rect x="0" y="887" width="1600" height="113" fill="#001a48"/>
+  <text x="54" y="921" class="white" font-size="13" font-weight="800" letter-spacing="1.8">LEGENDA</text>
+  <g transform="translate(54 944)">
+    <circle cx="10" cy="0" r="9" fill="#ffc629"/>
+    <text x="27" y="5" class="white small">Acessos e fluxo</text>
+    <rect x="188" y="-10" width="20" height="20" rx="5" fill="#00c4b3"/>
+    <text x="220" y="5" class="white small">Serviços públicos</text>
+    <rect x="394" y="-10" width="20" height="20" rx="5" fill="#7c2db8"/>
+    <text x="426" y="5" class="white small">Áreas especiais</text>
+    <path d="M608 0h35" stroke="#16a9dc" stroke-width="8"/>
+    <text x="654" y="5" class="white small">Rio</text>
+  </g>
+  <g transform="translate(1110 916)">
+    <circle cx="28" cy="28" r="27" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+    <path d="M28 12v32M20 20l8-8 8 8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <text x="68" y="25" class="white tiny">NORTE</text>
+    <text x="68" y="45" fill="#b7c5da" class="tiny">Mapa ilustrativo · não está em escala</text>
+  </g>
+</svg>

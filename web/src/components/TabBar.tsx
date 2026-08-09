@@ -3,17 +3,23 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { CalendarIcon, CloudSunIcon, HomeIcon, InfoIcon } from "./icons";
+import { CalendarIcon, CloudSunIcon, DollarIcon, HomeIcon, InfoIcon, MapIcon } from "./icons";
 
 const TABS = [
   { href: "/", label: "Início", Icon: HomeIcon },
   { href: "/programacao", label: "Programação", Icon: CalendarIcon },
+  { href: "/mapa", label: "Mapa", Icon: MapIcon },
+  { href: "/onde-comer", label: "Descontos", Icon: DollarIcon },
   { href: "/previsao", label: "Previsão", Icon: CloudSunIcon },
-  { href: "/informacoes", label: "Informações", Icon: InfoIcon },
+  { href: "/informacoes", label: "Info", Icon: InfoIcon },
 ];
 
 export function TabBar() {
   const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <nav
@@ -30,7 +36,7 @@ export function TabBar() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex flex-col items-center gap-1 px-1 py-2.5 text-[11px] font-medium transition-colors ${
+                className={`flex flex-col items-center gap-0.5 px-0.5 py-2 text-[9px] font-medium transition-colors min-[390px]:text-[10px] sm:gap-1 sm:px-1 sm:py-2.5 sm:text-[11px] ${
                   active
                     ? "text-utmb-navy dark:text-utmb-yellow"
                     : "text-muted hover:text-foreground"

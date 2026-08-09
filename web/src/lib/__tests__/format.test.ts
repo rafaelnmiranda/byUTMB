@@ -1,8 +1,21 @@
 import { describe, expect, it } from "vitest";
 
-import { capitalizeFirst, formatDateRange, formatDayLong, formatDayShort, formatRelative, formatTimeRange } from "../format";
+import {
+  capitalizeFirst,
+  formatDateRange,
+  formatDayLong,
+  formatDayShort,
+  formatEventSchedule,
+  formatRelative,
+  formatTimeRange,
+} from "../format";
 
 describe("formatação de datas", () => {
+  it("mostra só o início quando não há fim", () => {
+    expect(formatTimeRange("2025-09-18T22:00:00.000Z", null)).toBe("19:00");
+    expect(formatEventSchedule("2025-09-18T22:00:00.000Z", null, null)).toBe("19:00");
+  });
+
   it("mostra o horário de Paraty, não o do aparelho", () => {
     // 13:00 UTC = 10:00 em Paraty. Um atleta com o celular em outro fuso
     // precisa ver o horário do evento, não o de casa.

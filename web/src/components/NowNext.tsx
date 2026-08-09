@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useSyncExternalStore } from "react";
 
 import { formatDayLong, formatRelative, formatTimeRange } from "@/lib/format";
-import type { EventItem } from "@/lib/schedule";
+import { isEventLive, type EventItem } from "@/lib/schedule";
 
 import { EventCard } from "./EventCard";
 
@@ -24,9 +24,7 @@ export function NowNext({ events }: { events: EventItem[] }) {
     return <div className="h-40 animate-pulse rounded-xl bg-surface ring-1 ring-border-subtle" />;
   }
 
-  const happening = events.filter(
-    (event) => new Date(event.startsAt).getTime() <= now && new Date(event.endsAt).getTime() > now,
-  );
+  const happening = events.filter((event) => isEventLive(event, now));
   const upcoming = events
     .filter((event) => new Date(event.startsAt).getTime() > now)
     .slice(0, 4);

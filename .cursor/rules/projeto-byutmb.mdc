@@ -1,0 +1,24 @@
+---
+description: PWA Paraty Brazil by UTMB
+alwaysApply: true
+---
+
+# Paraty by UTMB
+
+- Repo: `/Users/Rafael/byUTMB`
+- Código ativo: **`web/`** (Next.js 16, React 19, Tailwind 4, Vitest)
+- Docs: `docs/PLANO_PWA.md`, `web/README.md`, `docs/CURSOR.md`
+- Comandos npm/node: sempre em `web/`
+- Prefixos web internos: `byutmb-*` (minúsculas)
+- UI e comentários: pt-BR
+- Nunca commitar `.env.local` nem chaves de API
+
+## Estrutura
+
+```
+web/src/          código do PWA
+web/public/       imagens, ícones, service worker
+docs/             planos e documentação operacional
+```
+
+O app iOS Swift foi removido. Backup: tag `backup/pre-ios-removal-*`.

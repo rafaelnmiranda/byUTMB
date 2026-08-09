@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { parseCSV, parseCSVToObjects } from "../csv";
-import { buildSchedule, zonedWallTimeToUTC } from "../schedule";
+import { buildSchedule, isEventLive, zonedWallTimeToUTC } from "../schedule";
 
 const fixture = readFileSync(join(__dirname, "fixtures/schedule.csv"), "utf8");
 
@@ -53,6 +53,45 @@ describe("fuso horário", () => {
   });
 });
 
+describe("horário final informado pela planilha", () => {
+  it("usa hora_final e deriva a duração do intervalo", () => {
+    const csv = [
+      "data,hora,titulo,descricao,local,hora_final,tipo,imagem",
+      "17/09/2026,10:00,UTMB EXPO,Expo aberta,EXPO,21:00,entretenimento,expo_main",
+    ].join("\n");
+
+    const [event] = buildSchedule(csv).events;
+
+    expect(event.startsAt).toBe("2026-09-17T13:00:00.000Z");
+    expect(event.endsAt).toBe("2026-09-18T00:00:00.000Z");
+    expect(event.durationSeconds).toBe(39600);
+  });
+
+  it("mantém evento pontual quando hora_final está vazia", () => {
+    const csv = [
+      "data,hora,titulo,descricao,local,hora_final,tipo,imagem",
+      "19/09/2026,15:00,Limite PTR 25,Tempo de corte,ARENA,,esporte,limit_cover",
+    ].join("\n");
+
+    const [event] = buildSchedule(csv).events;
+
+    expect(event.endsAt).toBeNull();
+    expect(event.durationSeconds).toBeNull();
+  });
+
+  it("interpreta horário final anterior ao início como dia seguinte", () => {
+    const csv = [
+      "data,hora,titulo,descricao,local,hora_final,tipo,imagem",
+      "19/09/2026,23:30,Atividade noturna,Travessia,ARENA,01:00,esporte,night",
+    ].join("\n");
+
+    const [event] = buildSchedule(csv).events;
+
+    expect(event.endsAt).toBe("2026-09-20T04:00:00.000Z");
+    expect(event.durationSeconds).toBe(5400);
+  });
+});
+
 describe("programação a partir da planilha real", () => {
   const schedule = buildSchedule(fixture);
 
@@ -88,9 +127,16 @@ describe("programação a partir da planilha real", () => {
     expect(treino?.startsAt).toBe("2025-09-19T10:30:00.000Z"); // 07:30 em Paraty
   });
 
-  it("usa 1 h quando a planilha não informa duração", () => {
+  it("não inventa horário de fim quando a planilha deixa duração vazia", () => {
     const abertura = schedule.events.find((event) => event.title.includes("Abertura Oficial"));
-    expect(abertura?.durationSeconds).toBe(3600);
+    expect(abertura?.durationSeconds).toBeNull();
+    expect(abertura?.endsAt).toBeNull();
+  });
+
+  it("mantém duração quando a planilha informa segundos", () => {
+    const expo = schedule.events.find((event) => event.title === "UTMB EXPO");
+    expect(expo?.durationSeconds).toBe(39600);
+    expect(expo?.endsAt).not.toBeNull();
   });
 
   it("ordena por horário de início", () => {
@@ -161,8 +207,15 @@ describe("agenda de 2026 publicada na planilha", () => {
     }
   });
 
-  it("converte os horários para o fuso de Paraty", () => {
-    // Primeiro evento às 10:00 de Paraty = 13:00 UTC.
-    expect(schedule.events[0].startsAt).toBe("2026-09-17T13:00:00.000Z");
+  it("marca largada como ao vivo só na janela após o início", () => {
+    const csv = readFileSync(join(__dirname, "fixtures/agenda-2026.csv"), "utf8");
+    const { events } = buildSchedule(csv);
+    const largada = events.find((e) => e.title.includes("Largada / Start PTR 108"));
+    expect(largada?.endsAt).toBeNull();
+
+    const start = Date.parse(largada!.startsAt);
+    expect(isEventLive(largada!, start)).toBe(true);
+    expect(isEventLive(largada!, start + 30 * 60 * 1000)).toBe(true);
+    expect(isEventLive(largada!, start + 46 * 60 * 1000)).toBe(false);
   });
 });

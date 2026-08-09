@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BrandBar } from "@/components/BrandBar";
+import { EventImage } from "@/components/EventImage";
 import { ShareButton } from "@/components/ShareButton";
 import { CalendarPlusIcon, ClockIcon, EventTypeIcon, LinkIcon, PinIcon } from "@/components/icons";
 import { EVENT_TYPE_STYLES } from "@/lib/event-type";
-import { formatDayLong, formatDuration, formatTimeRange } from "@/lib/format";
-import { getSchedule } from "@/lib/schedule";
+import { formatDayLong, formatEventSchedule, formatRelative, formatTimeRange } from "@/lib/format";
+import { getSchedule } from "@/lib/schedule.server";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -44,13 +46,19 @@ export default async function EventPage({ params }: Props) {
 
   return (
     <main className="flex flex-1 flex-col">
-      <div className="px-4 pt-[max(1rem,env(safe-area-inset-top))]">
-        <Link
-          href="/programacao"
-          className="inline-flex items-center gap-1 py-2 text-sm font-semibold text-utmb-navy dark:text-utmb-yellow"
-        >
-          ← Programação
-        </Link>
+      <BrandBar />
+
+      <div className="relative z-10 -mt-2 overflow-hidden bg-background">
+        <EventImage event={event} variant="hero" />
+
+        <div className="px-4 pt-4">
+          <Link
+            href="/programacao"
+            className="inline-flex items-center gap-1 py-2 text-sm font-semibold text-utmb-navy dark:text-utmb-yellow"
+          >
+            ← Programação
+          </Link>
+        </div>
       </div>
 
       <article className="flex flex-col gap-5 px-4 pb-8 pt-2">
@@ -71,8 +79,7 @@ export default async function EventPage({ params }: Props) {
           <Row icon={<ClockIcon className="h-5 w-5" />} label="Quando">
             <span>{formatDayLong(event.dayKey)}</span>
             <br />
-            {formatTimeRange(event.startsAt, event.endsAt)}{" "}
-            <span className="text-muted">· {formatDuration(event.durationSeconds)}</span>
+            {formatEventSchedule(event.startsAt, event.endsAt, event.durationSeconds)}
           </Row>
 
           {event.location && (

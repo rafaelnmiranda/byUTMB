@@ -9,12 +9,21 @@
  * fica em cache importa mais do que a conveniência de uma biblioteca.
  */
 
-const VERSION = "v1";
+const VERSION = "v3";
 const SHELL_CACHE = `shell-${VERSION}`;
 const PAGES_CACHE = `pages-${VERSION}`;
 const ASSETS_CACHE = `assets-${VERSION}`;
 
-const SHELL_URLS = ["/", "/programacao", "/informacoes", "/offline"];
+const SHELL_URLS = [
+  "/",
+  "/programacao",
+  "/mapa",
+  "/onde-comer",
+  "/informacoes",
+  "/offline",
+  "/api/partners/redeemable",
+  "/images/maps/mapa-evento-2026.svg",
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -46,7 +55,13 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // O .ics é gerado sob demanda e não deve ser servido de cache.
+  // Catálogo enxuto de ativação: network-first (útil sem sinal na hora da conta).
+  if (url.pathname === "/api/partners/redeemable") {
+    event.respondWith(networkFirst(request));
+    return;
+  }
+
+  // Demais APIs (.ics, ativações) não devem ser servidas de cache.
   if (url.pathname.startsWith("/api/")) return;
 
   if (request.mode === "navigate") {

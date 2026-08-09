@@ -29,6 +29,7 @@
 :root,
 :root[data-theme="light"] {
   --background: #eef1f7;
+  --screen-background: linear-gradient(90deg, #1ba29c 0%, #fffe79 100%);
   --surface: #ffffff;
   --surface-raised: #ffffff;
   --foreground: #0f1729;
@@ -41,6 +42,9 @@
 /* Escuro em navy, não em cinza — é o que faz o app parecer da marca */
 :root[data-theme="dark"] {
   --background: #070d1c;
+  --screen-background:
+    linear-gradient(rgba(7, 13, 28, 0.76), rgba(7, 13, 28, 0.76)),
+    linear-gradient(90deg, #1ba29c 0%, #fffe79 100%);
   --surface: #101a33;
   --surface-raised: #16223f;
   --foreground: #eaeef7;
@@ -70,6 +74,12 @@ body {
   padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
 }
 
+/* Fundo contínuo das telas, com as duas cores escolhidas para a identidade visual. */
+.bg-screen-gradient {
+  background-color: #1ba29c;
+  background-image: var(--screen-background);
+}
+
 /* Evita o zoom automático do Safari ao focar um campo */
 input,
 select,
@@ -83,11 +93,30 @@ textarea {
   outline-offset: 2px;
 }
 
+/* Comprovação viva do benefício — presença discreta, não ruído */
+@keyframes redeem-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 198, 41, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 198, 41, 0);
+  }
+}
+
+.redeem-pulse {
+  animation: redeem-pulse 2.2s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .redeem-pulse {
+    animation: none;
   }
 }

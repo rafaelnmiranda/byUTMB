@@ -1,30 +1,37 @@
-# Paraty Brazil by UTMB — app iOS
+# Paraty Brazil by UTMB — PWA
 
-App oficial do evento de trail running **Paraty Brazil by UTMB**, em Paraty/RJ.
-SwiftUI, iOS. Cinco abas: Programação, Informações, Previsão do tempo, Astronomia e
-Mensagem do dia.
-
-A programação é carregada em tempo real de uma planilha do Google Sheets publicada em
-CSV, o que permite à produção do evento atualizar horários sem publicar uma nova versão
-do app.
+Site instalável (PWA) do evento de trail running **Paraty Brazil by UTMB**, em Paraty/RJ.
+Programação, parcerias, previsão do tempo e resgate de benefícios — atualizados via
+Google Sheets, sem passar por loja de apps.
 
 ## Rodando
 
-Requer Xcode 16 ou superior.
-
 ```bash
 git clone https://github.com/rafaelnmiranda/byUTMB.git
-cd byUTMB
-open byUTMB.xcodeproj
+cd byUTMB/web
+npm install
+cp .env.example .env.local   # e preencha as variáveis
+npm run dev
 ```
 
-Selecione o scheme `byUTMB` e rode em um simulador de iPhone.
+## Cursor
+
+Abra **`byUTMB.code-workspace`** na raiz do repo (não subpastas antigas).
+Detalhes: [`docs/CURSOR.md`](docs/CURSOR.md).
 
 ## Documentação
 
-- **[docs/PLANO_RETOMADA.md](docs/PLANO_RETOMADA.md)** — auditoria do estado atual, bugs
-  conhecidos, melhorias, plano de testes e roteiro de publicação na App Store
-- **[CLAUDE.md](CLAUDE.md)** — contexto e convenções para trabalhar com o Claude Code
+- **[web/README.md](web/README.md)** — desenvolvimento, variáveis, deploy
+- **[docs/PLANO_PWA.md](docs/PLANO_PWA.md)** — arquitetura e roteiro do PWA
+- **[CLAUDE.md](CLAUDE.md)** — contexto para o Agent
 
-> ⚠️ Há chaves de API em texto claro no histórico deste repositório público
-> (OpenWeatherMap e NASA). Elas precisam ser revogadas — ver plano §2.1.
+> ⚠️ Há chaves de API em texto claro no **histórico** deste repositório público
+> (OpenWeatherMap e NASA, do app iOS removido). Revogue-as se ainda estiverem ativas.
+
+## Backup do app iOS
+
+O código Swift foi removido em agosto/2026. Para restaurar:
+
+- Tag Git: `backup/pre-ios-removal-20260809`
+- Branch: `backup/ios-completo-20260809`
+- Arquivo: `~/Desktop/byUTMB-ios-backup-20260809.tar.gz`
