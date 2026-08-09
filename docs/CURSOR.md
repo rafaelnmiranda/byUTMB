@@ -2,10 +2,22 @@
 
 ## Como abrir
 
-1. **File → Open Workspace from File…**
-2. Selecione **`byUTMB.code-workspace`** na raiz do repo
+1. No Finder, **duplo clique** em `byUTMB.code-workspace`  
+   — ou **File → Open…** (`Cmd+O`) e selecione esse arquivo
+2. Confirme que a barra de título mostra **Paraty by UTMB** (não só o JSON do arquivo)
 
 Não abra subpastas avulsas nem `Documents/byutmb` (projeto antigo separado).
+
+### Erro: `cwd "/Users/Rafael/byUTMB/byUTMB" does not exist`
+
+**Correção imediata:** a pasta `byUTMB/` na raiz foi recriada como ponte — recarregue a
+janela (**Cmd+Shift+P** → `Developer: Reload Window`) e abra um terminal novo.
+
+**Correção definitiva:**
+
+1. **File → Close Window**
+2. Duplo clique em `/Users/Rafael/byUTMB/byUTMB.code-workspace` no Finder
+3. Terminal novo deve abrir em `.../byUTMB/web`
 
 ## O que o workspace faz
 
