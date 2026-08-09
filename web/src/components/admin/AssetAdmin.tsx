@@ -58,9 +58,9 @@ export function AssetAdmin({ initialAuthenticated }: AssetAdminProps) {
   }, []);
 
   useEffect(() => {
-    if (authenticated) {
-      void loadInventory();
-    }
+    if (!authenticated) return;
+    const timer = window.setTimeout(() => void loadInventory(), 0);
+    return () => window.clearTimeout(timer);
   }, [authenticated, loadInventory]);
 
   const filteredSlots = useMemo(() => {

@@ -34,11 +34,6 @@ export function BenefitRedeemFlow({
     return () => window.clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    if (phase !== "live" || expiresAt === null) return;
-    if (nowMs >= expiresAt) setPhase("expired");
-  }, [phase, expiresAt, nowMs]);
-
   const activate = () => {
     const start = Date.now();
     setNowMs(start);

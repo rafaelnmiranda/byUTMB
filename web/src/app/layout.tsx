@@ -30,6 +30,18 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Paraty Brazil by UTMB",
     locale: "pt_BR",
+    images: [
+      {
+        url: "/logo-color.png",
+        width: 640,
+        height: 358,
+        alt: "Paraty Brazil by UTMB",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    images: ["/logo-color.png"],
   },
 };
 

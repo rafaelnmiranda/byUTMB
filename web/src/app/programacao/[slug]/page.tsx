@@ -7,7 +7,7 @@ import { EventImage } from "@/components/EventImage";
 import { ShareButton } from "@/components/ShareButton";
 import { CalendarPlusIcon, ClockIcon, EventTypeIcon, LinkIcon, PinIcon } from "@/components/icons";
 import { EVENT_TYPE_STYLES } from "@/lib/event-type";
-import { formatDayLong, formatEventSchedule, formatRelative, formatTimeRange } from "@/lib/format";
+import { formatDayLong, formatEventSchedule, formatTimeRange } from "@/lib/format";
 import { getSchedule } from "@/lib/schedule.server";
 
 interface Props {

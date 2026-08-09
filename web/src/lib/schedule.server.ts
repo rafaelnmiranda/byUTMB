@@ -18,7 +18,8 @@ export async function getSchedule(): Promise<Schedule> {
   });
 
   if (!response.ok) {
-    throw new Error(`Falha ao carregar a programação (HTTP ${response.status})`);
+    console.error(`Falha ao carregar a programação (HTTP ${response.status})`);
+    return { events: [], days: [], fetchedAt: new Date().toISOString(), skipped: 0 };
   }
 
   const schedule = buildSchedule(await response.text());

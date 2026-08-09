@@ -11,7 +11,6 @@ export function PartnerOfflineWarmup({ slugs }: { slugs: string[] }) {
     if (slugs.length === 0) return;
 
     let cancelled = false;
-    let timer: ReturnType<typeof setTimeout> | undefined;
 
     const run = async () => {
       try {
@@ -31,13 +30,13 @@ export function PartnerOfflineWarmup({ slugs }: { slugs: string[] }) {
       }
     };
 
-    timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       void run();
     }, 900);
 
     return () => {
       cancelled = true;
-      if (timer) clearTimeout(timer);
+      clearTimeout(timer);
     };
   }, [slugs]);
 

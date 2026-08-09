@@ -18,7 +18,8 @@ export async function getPartners(): Promise<PartnerCatalog> {
   });
 
   if (!response.ok) {
-    throw new Error(`Falha ao carregar parceiros (HTTP ${response.status})`);
+    console.error(`Falha ao carregar parceiros (HTTP ${response.status})`);
+    return { partners: [], fetchedAt: new Date().toISOString(), skipped: 0 };
   }
 
   const catalog = buildPartners(await response.text());
