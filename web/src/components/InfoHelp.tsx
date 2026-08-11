@@ -26,7 +26,7 @@ const HELP_ITEMS: HelpItem[] = [
   },
   {
     title: "Início",
-    body: "A home mostra o que está acontecendo agora e o próximo evento. Os atalhos levam às seções principais sem precisar procurar na barra.",
+    body: "A home mostra o que está acontecendo agora, o próximo evento e atalhos para programação e descontos.",
     Icon: HomeIcon,
     href: "/",
   },
