@@ -13,12 +13,12 @@ export const metadata: Metadata = {
 const ESSENTIAL_POINTS = [
   "Largada e chegada",
   "Posto médico",
-  "Recovery e chuveiros",
-  "Banheiros acessíveis",
+  "Recovery e área VIP",
+  "Dispersão e gift finisher",
   "Retirada de kits",
-  "Drop bag",
-  "Loja UTMB",
-  "Palco e alimentação",
+  "Credenciamento",
+  "Loja oficial",
+  "Palco e praça de alimentação",
 ];
 
 export default function MapPage() {
@@ -92,7 +92,7 @@ export default function MapPage() {
         </section>
 
         <a
-          href="/images/maps/mapa-evento-2026.svg"
+          href="/images/maps/mapa-evento-2026.png"
           target="_blank"
           rel="noopener noreferrer"
           className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border-subtle bg-surface px-4 py-3 text-sm font-semibold text-utmb-navy transition active:scale-[0.99] dark:text-utmb-yellow"

@@ -9,7 +9,7 @@
  * fica em cache importa mais do que a conveniência de uma biblioteca.
  */
 
-const VERSION = "v3";
+const VERSION = "v4";
 const SHELL_CACHE = `shell-${VERSION}`;
 const PAGES_CACHE = `pages-${VERSION}`;
 const ASSETS_CACHE = `assets-${VERSION}`;
@@ -22,7 +22,7 @@ const SHELL_URLS = [
   "/informacoes",
   "/offline",
   "/api/partners/redeemable",
-  "/images/maps/mapa-evento-2026.svg",
+  "/images/maps/mapa-evento-2026.png",
 ];
 
 self.addEventListener("install", (event) => {

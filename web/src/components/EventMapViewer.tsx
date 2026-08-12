@@ -9,7 +9,7 @@ import {
   type ReactZoomPanPinchContentRef,
 } from "react-zoom-pan-pinch";
 
-const MAP_SRC = "/images/maps/mapa-evento-2026.svg";
+const MAP_SRC = "/images/maps/mapa-evento-2026.png";
 
 export function EventMapViewer() {
   const transformRef = useRef<ReactZoomPanPinchContentRef>(null);
@@ -42,7 +42,7 @@ export function EventMapViewer() {
       className={`relative overflow-hidden bg-[#e7edf4] ${
         isFullscreen
           ? "fixed inset-0 z-[100] h-dvh w-screen"
-          : "aspect-[8/5] w-full rounded-xl"
+          : "aspect-[3/4] w-full rounded-xl"
       }`}
     >
       <TransformWrapper
@@ -63,9 +63,9 @@ export function EventMapViewer() {
         >
           <Image
             src={MAP_SRC}
-            alt="Mapa ilustrado da Arena e da Expo do Paraty Brazil by UTMB 2026, conectadas pela Ponte do Pontal"
-            width={1600}
-            height={1000}
+            alt="Mapa ilustrado da Expo e da Arena do Paraty Brazil by UTMB 2026, conectadas pela Ponte do Pontal"
+            width={724}
+            height={1024}
             priority
             unoptimized
             draggable={false}
