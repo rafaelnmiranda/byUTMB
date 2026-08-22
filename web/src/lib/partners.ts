@@ -63,6 +63,9 @@ export const PARTNER_CATEGORY_LABELS: Record<PartnerCategory, string> = {
   outros: "Parceiro",
 };
 
+/** gid da aba `parceiros` em https://docs.google.com/spreadsheets/d/1Tn6sLvxj5kEQD9l8hZb9BP8dxz1sQzKp */
+export const PARTNERS_SHEET_GID = "1344926349";
+
 const CATEGORY_ALIASES: Record<string, PartnerCategory> = {
   food: "food",
   restaurante: "food",
@@ -83,7 +86,8 @@ export function resolvePartnersCsvUrl(): string | null {
   const sheetId = schedule.match(/\/spreadsheets\/d\/([^/]+)/)?.[1];
   if (!sheetId) return null;
 
-  return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=1655332325`;
+  // Aba `parceiros` da planilha de produção (programacao2026.xlsx).
+  return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${PARTNERS_SHEET_GID}`;
 }
 
 /**
